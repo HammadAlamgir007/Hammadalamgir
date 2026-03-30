@@ -1,4 +1,4 @@
-# 🚀 Futuristic Portfolio - Muhammad Akash Zaheer
+# 🚀 Futuristic Portfolio - Muhammad Hammad Alamgir
 
 A cutting-edge, cyberpunk-themed portfolio showcasing full-stack development expertise with stunning visual effects and modern UI/UX design.
 
@@ -6,6 +6,7 @@ A cutting-edge, cyberpunk-themed portfolio showcasing full-stack development exp
 ![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-Latest-FF0080?style=for-the-badge&logo=framer)
+![.NET Core](https://img.shields.io/badge/.NET_Core-latest-512BD4?style=for-the-badge&logo=dotnet)
 
 ## ✨ Features
 
@@ -63,35 +64,31 @@ A cutting-edge, cyberpunk-themed portfolio showcasing full-stack development exp
 
 2. **About Me**
    - Professional introduction
-   - Backend development focus
+   - Full-stack development focus
    - Experience highlights
 
 3. **Why Hire Me**
-   - Key strengths and differentiators
-   - Value propositions
-   - Professional achievements
+   - Full-Stack Adaptability
+   - Database Driven
+   - Problem Solving
+   - Continuous Learning
 
 4. **Services**
-   - Backend Development
-   - API Architecture
-   - Cloud Solutions
-   - Microservices
-   - Database Design
-   - DevOps Integration
+   - Web Application Development
+   - Database Design & Optimization
+   - REST API Development
 
 5. **Technical Arsenal**
-   - **Languages**: JavaScript, Python, Java
-   - **Mobile Development**: Flutter, Java (Android), XML
-   - **Frontend**: React, Angular, HTML/CSS
-   - **Backend**: Node.js, Express.js, NestJS
-   - **AI/ML**: TensorFlow, PyTorch, Scikit-learn
-   - **Databases**: MongoDB, PostgreSQL, Redis
-   - **Cloud & DevOps**: AWS, Docker, Git
+   - **Languages**: C#, JavaScript, Python, SQL, HTML/CSS
+   - **Frameworks**: ASP.NET Core MVC, Entity Framework, React, Next.js, Express.js, Flutter
+   - **Databases**: Microsoft SQL Server, MySQL, MongoDB
+   - **Tools & Cloud**: Visual Studio, VS Code, Git/GitHub, AWS, ClickUp, ODOO
+   - **Core Concepts**: OOP, MVC Architecture, REST APIs, Stored Procedures
 
 6. **Projects**
-   - Car Rental Platform (Microservices)
-   - BakedBliss E-commerce
-   - Crime Reporting System
+   - Fusionner PDF (PDF Merging Tool)
+   - Rahila Labs (Professional Home Diagnostic Testing)
+   - Movie Recommendation System (Machine Learning)
    - Detailed tech stacks and links
 
 7. **Contact Form**
@@ -162,7 +159,7 @@ A cutting-edge, cyberpunk-themed portfolio showcasing full-stack development exp
 - **Autoprefixer** - Browser compatibility
 
 ### **Deployment**
-- **Vercel** - Hosting platform
+- **Vercel / AWS** - Hosting platforms
 - **Git** - Version control
 - **GitHub** - Repository hosting
 
@@ -212,8 +209,8 @@ Protofolio/
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/AkashZaheer045/Protofolio.git
-cd Protofolio
+git clone https://github.com/HammadAlamgir007/Hammadalamgir.git
+cd Hammadalamgir
 ```
 
 2. **Install dependencies**
@@ -233,7 +230,7 @@ npm run build
 
 ### **Environment Setup**
 
-No environment variables required for basic setup. The portfolio runs entirely on the frontend.
+No environment variables required for basic setup. The portfolio runs entirely on the frontend. (For contact form functionality, ensure `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REDIRECT_URI`, and `GOOGLE_REFRESH_TOKEN` are appropriately configured).
 
 ## 🎨 **Customization Guide**
 
@@ -301,17 +298,12 @@ No environment variables required for basic setup. The portfolio runs entirely o
 - Edge (latest)
 - Mobile browsers (iOS Safari, Chrome Mobile)
 
-## 📄 **License**
-
-This project is open source and available under the [MIT License](LICENSE).
-
 ## 👤 **Author**
 
-**Muhammad Akash Zaheer**
-- Portfolio: [Your Live URL]
-- GitHub: [@AkashZaheer045](https://github.com/AkashZaheer045)
-- LinkedIn: [Muhammad Akash Zaheer](https://linkedin.com/in/your-profile)
-- Email: your.email@example.com
+**Muhammad Hammad Alamgir**
+- GitHub: [github.com/ihammadalamgir](https://github.com/ihammadalamgir)
+- LinkedIn: [Hammad Alamgir](https://linkedin.com/in/ihammadalamgir)
+- Email: hammadalamgir778@gmail.com
 
 ## 🙏 **Acknowledgments**
 
@@ -321,39 +313,11 @@ This project is open source and available under the [MIT License](LICENSE).
 - **Google Fonts** - Outfit font family
 - **React Community** - Inspiration and resources
 
-## 📝 **Changelog**
-
-### Version 2.0.0 (Current)
-- ✨ Added cyberpunk aurora background
-- 🌌 Implemented starfield universe effect
-- 🚀 Added glassmorphism UI components
-- 🎨 Integrated neumorphism design
-- 🎭 Implemented parallax scroll animations
-- 📱 Enhanced mobile responsiveness
-- ⚡ Performance optimizations
-
-### Version 1.0.0
-- 🎉 Initial release
-- 📄 Basic portfolio structure
-- 🎨 Light/dark theme toggle
-- 📱 Responsive design
-
-## 🔮 **Future Enhancements**
-
-- [ ] Blog section integration
-- [ ] Advanced 3D elements with Three.js
-- [ ] Custom cursor effects
-- [ ] Hologram scanline effects
-- [ ] Animated typography variants
-- [ ] Liquid morphing shapes
-- [ ] CMS integration for easy updates
-- [ ] Multi-language support
-
 ---
 
 <div align="center">
 
-**Built with ❤️ and ☕ by Muhammad Akash Zaheer**
+**Built with ❤️ and ☕ by Muhammad Hammad Alamgir**
 
 ⭐ Star this repo if you find it helpful!
 
