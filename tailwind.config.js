@@ -15,6 +15,7 @@ module.exports = {
         heading: ['Sora', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
         sans: ['Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",

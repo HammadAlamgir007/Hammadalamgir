@@ -34,7 +34,7 @@ app.get('/api/health', (req, res) => {
 
 // Contact form email endpoint matches Vercel serverless API
 app.post('/api/contact', async (req, res) => {
-    const { name, email, message } = req.body;
+    const { name, email, subject, message } = req.body;
 
     // Validate input
     if (!name || !email || !message) {
@@ -57,9 +57,9 @@ app.post('/api/contact', async (req, res) => {
         // Email to you (the portfolio owner)
         const mailOptions = {
             from: `"Portfolio Contact Form" <${EMAIL_USER}>`,
-            to: EMAIL_USER, // Your email - akashzaheer786@gmail.com
+            to: EMAIL_USER, // hammadalamgir778@gmail.com
             replyTo: email, // Sender's email for easy reply
-            subject: `🚀 New Contact Form Submission from ${name}`,
+            subject: subject ? `📩 ${subject} — from ${name}` : `📩 Portfolio Contact from ${name}`,
             html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px 10px 0 0;">
@@ -84,6 +84,14 @@ app.post('/api/contact', async (req, res) => {
                   <a href="mailto:${email}" style="color: #667eea; text-decoration: none;">${email}</a>
                 </td>
               </tr>
+              ${subject ? `<tr>
+                <td style="padding: 10px 0; border-bottom: 1px solid #e9ecef;">
+                  <strong style="color: #667eea;">📌 Subject:</strong>
+                </td>
+                <td style="padding: 10px 0; border-bottom: 1px solid #e9ecef; color: #333;">
+                  ${subject}
+                </td>
+              </tr>` : ''}
             </table>
             
             <div style="margin-top: 20px;">
@@ -99,7 +107,7 @@ app.post('/api/contact', async (req, res) => {
           </div>
         </div>
       `,
-            text: `New Contact Form Submission\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
+            text: `New Contact Form Submission\n\nName: ${name}\nEmail: ${email}\n${subject ? `Subject: ${subject}\n` : ''}Message: ${message}`,
         };
 
         await transporter.sendMail(mailOptions);

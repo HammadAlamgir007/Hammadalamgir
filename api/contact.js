@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ success: false, error: 'Method Not Allowed' });
   }
 
-  const { name, email, message } = req.body;
+  const { name, email, subject, message } = req.body;
 
   // 1. Validation Logic
   if (!name || !email || !message) {
@@ -34,8 +34,8 @@ export default async function handler(req, res) {
       from: `"${name}" <${email}>`, // Sender's name and email
       to: process.env.EMAIL_USER,    // Your receiving email address
       replyTo: email,
-      subject: `New Portfolio Contact from ${name}`,
-      text: `You have received a new message from your portfolio website:\n\nName: ${name}\nEmail: ${email}\nMessage:\n${message}`,
+      subject: subject ? `📩 ${subject} — from ${name}` : `📩 Portfolio Contact from ${name}`,
+      text: `New contact from your portfolio:\n\nName: ${name}\nEmail: ${email}\n${subject ? `Subject: ${subject}\n` : ''}Message:\n${message}`,
       html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px 10px 0 0;">
