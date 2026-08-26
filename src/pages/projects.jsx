@@ -3,46 +3,46 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import {
-  faFilePdf,
   faVial,
-  faFilm,
+  faCode,
   faArrowRight,
+  faShieldHalved,
 } from "@fortawesome/free-solid-svg-icons";
 import Card from "../components/Card";
 
 const cards = [
   {
-    icon: faFilePdf,
-    title: "Fusionner PDF",
-    tagline: "Drag-and-drop PDF merging at scale",
+    icon: faShieldHalved,
+    title: "Aik Tijarat — Enterprise Backend",
+    tagline: "Real-world enterprise Java & Spring Boot backend",
     description:
-      "A responsive web app that lets users merge PDF files instantly — no uploads to third-party servers, fully client-side processing for privacy.",
-    techStack: ["Next.js", "TypeScript", "AWS", "Tailwind CSS"],
-    impact: "100% client-side — zero server costs for file processing",
+      "Enterprise backend platform developed through Warmbytes vendor engagement. Implements a layered architecture, sensitive payload encryption, and secure JWT authentication.",
+    techStack: ["Java", "Spring Boot", "Spring Security", "JWT", "MySQL", "Postman"],
+    impact: "Enterprise security architecture with AES-GCM & RSA encryption",
     challenges: [
-      "Integrated PDF.js for in-browser merging without server roundtrips",
-      "Implemented drag-and-drop reordering for intuitive UX",
-      "Deployed on AWS with CDN for sub-second global load times",
+      "Architected clean Controller-Service-Repository-DTO-Entity layered backend",
+      "Engineered secure handling of sensitive data with RSA & AES-GCM encryption",
+      "Implemented JWT authentication, authorization, and Postman test suites",
     ],
     links: {
       repo: "https://github.com/ihammadalamgir",
-      demo: "https://fussioner-pdf.vercel.app/",
+      demo: null,
     },
-    gradient: "from-violet-600 via-indigo-600 to-blue-600",
-    live: true,
+    gradient: "from-blue-600 via-indigo-600 to-purple-600",
+    live: false,
   },
   {
     icon: faVial,
-    title: "Rahila Labs",
-    tagline: "Home diagnostic booking platform",
+    title: "Rahila Labs — Diagnostic Platform",
+    tagline: "Online diagnostic laboratory & home sampling",
     description:
-      "A professional telemedicine-adjacent platform where patients book home lab tests with address confirmation — reducing friction from clinic visits.",
-    techStack: ["React", "Next.js", "Tailwind CSS", "Node.js"],
-    impact: "Eliminated the need for in-person test registration",
+      "Final Year Project: A full-scale diagnostic platform where patients book home lab tests and track results across patients, admins, lab services, and riders.",
+    techStack: ["Python", "REST APIs", "SQL Server", "React.js"],
+    impact: "End-to-end medical test booking & home sampling dispatch",
     challenges: [
-      "Built a multi-step booking flow with address confirmation and slot selection",
-      "Designed mobile-first UI for patients accessing from low-end devices",
-      "Integrated notification system for test reminders and result updates",
+      "Developed backend REST API modules for test booking and patient workflows",
+      "Integrated SQL Server for structured relational storage and query optimization",
+      "Built and seamlessly integrated APIs with a responsive React.js frontend",
     ],
     links: {
       repo: "https://github.com/HammadAlamgir007/RahilaLabs.git",
@@ -52,23 +52,23 @@ const cards = [
     live: true,
   },
   {
-    icon: faFilm,
-    title: "Movie Recommendation Engine",
-    tagline: "ML-powered collaborative filtering",
+    icon: faCode,
+    title: "Java Spring Boot REST API",
+    tagline: "High-performance layered CRUD & ORM system",
     description:
-      "A Python-powered recommender system using collaborative filtering — trained on a large movie dataset to surface personalized suggestions via a Flask API.",
-    techStack: ["Python", "Flask", "Pandas", "Machine Learning"],
-    impact: "85%+ recommendation accuracy on test dataset",
+      "A production-grade RESTful API built with Spring Boot, Spring Data JPA, and Hibernate — featuring DTO validation, custom queries, and global exception handling.",
+    techStack: ["Java", "Spring Boot", "Hibernate", "Spring Data JPA", "MySQL", "Maven"],
+    impact: "Standardized API architecture with 100% verified endpoints in Postman",
     challenges: [
-      "Preprocessed 100K+ rows with Pandas to remove noise and improve model quality",
-      "Implemented user-user collaborative filtering from scratch",
-      "Built a Flask REST API to serve real-time recommendations",
+      "Engineered layered CRUD endpoints with strict DTO request/response schemas",
+      "Integrated MySQL database utilizing Hibernate ORM and Spring Data JPA",
+      "Implemented comprehensive validation and unified global exception handling",
     ],
     links: {
       repo: "https://github.com/ihammadalamgir",
       demo: null,
     },
-    gradient: "from-amber-600 via-orange-600 to-red-600",
+    gradient: "from-amber-600 via-orange-600 to-rose-600",
     live: false,
   },
 ];
@@ -76,23 +76,23 @@ const cards = [
 const Projects = () => {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.15, duration: 0.5 }}
-      viewport={{ margin: "-100px", once: true }}
-      className="py-20 md:py-28 px-6 md:px-16 bg-secondary/25"
+      transition={{ delay: 0.15, duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+      viewport={{ margin: "-80px", once: true }}
+      className="py-28 md:py-40 px-6 sm:px-8 md:px-12 bg-transparent"
       id="project"
     >
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-20">
           <span className="section-badge">Portfolio</span>
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 font-heading">
             Featured <span className="text-gradient">Projects</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Real applications built to solve real problems — not just tutorial clones.
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg font-normal leading-relaxed">
+            Enterprise backend systems, secure microservices, and database platforms built with Java, Spring Boot, and Python.
           </p>
         </div>
 
@@ -107,27 +107,23 @@ const Projects = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="text-center mt-12"
+          transition={{ delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
+          className="text-center mt-20"
         >
-          <p className="text-muted-foreground mb-4 text-sm">
-            More experiments, side projects, and open-source contributions on GitHub.
+          <p className="text-muted-foreground mb-6 text-sm font-normal">
+            More open-source repositories, system prototypes, and backend architectures on GitHub.
           </p>
-          <motion.a
+          <a
             href="https://github.com/ihammadalamgir"
             target="_blank"
             rel="noreferrer"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl
-                       border-2 border-border text-foreground font-semibold text-sm
-                       hover:border-primary hover:text-primary hover:bg-primary/5
-                       transition-all duration-300"
+            className="btn-outline inline-flex items-center gap-3 !py-3.5 !px-8 text-sm"
+            data-cursor-text="GitHub"
           >
             <FontAwesomeIcon icon={faGithub} className="w-4 h-4" />
-            View All on GitHub
-            <FontAwesomeIcon icon={faArrowRight} className="w-3.5 h-3.5" />
-          </motion.a>
+            Explore All on GitHub
+            <FontAwesomeIcon icon={faArrowRight} className="w-3.5 h-3.5 ml-1" />
+          </a>
         </motion.div>
 
       </div>

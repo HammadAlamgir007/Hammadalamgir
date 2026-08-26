@@ -12,9 +12,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        heading: ['Sora', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
-        sans: ['Inter', 'sans-serif'],
+        heading: ['Inter', '-apple-system', 'sans-serif'],
+        body: ['Inter', '-apple-system', 'sans-serif'],
+        sans: ['Inter', '-apple-system', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {

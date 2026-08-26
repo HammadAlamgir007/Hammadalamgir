@@ -2,9 +2,6 @@ import { motion, useInView } from "framer-motion";
 import React, { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faLightbulb,
-  faBullseye,
-  faBolt,
   faGraduationCap,
   faCalendar,
   faMapMarkerAlt,
@@ -12,189 +9,158 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import profile from "../assets/images/profile.png";
 
-const highlights = [
-  {
-    icon: faLightbulb,
-    title: "Product-Minded",
-    gradient: "from-amber-500 to-orange-500",
-    description:
-      "I build features users actually need — combining clean architecture with real business outcomes.",
-  },
-  {
-    icon: faBullseye,
-    title: "Quality First",
-    gradient: "from-violet-500 to-indigo-500",
-    description:
-      "Every line I write follows SOLID principles, tested patterns, and maintainable code practices.",
-  },
-  {
-    icon: faBolt,
-    title: "Fast Learner",
-    gradient: "from-cyan-500 to-blue-500",
-    description:
-      "Picked up React, Next.js, and Flutter alongside .NET — I expand my stack to fit the problem.",
-  },
-];
-
 const expertise = [
-  "C#", "ASP.NET Core", "Entity Framework", "React", "Next.js",
-  "SQL Server", "REST APIs", "Node.js", "Flutter", "Git",
+  "Java", "Spring Boot", "Spring Security", "JWT", "Spring Data JPA",
+  "Hibernate", "REST APIs", "MySQL", "PostgreSQL", "SQL Server",
+  "Python", "React.js", "Maven", "Postman", "Git & GitHub",
 ];
 
 const timeline = [
   {
     year: "Jun 2026 – Present",
-    title: "Software Engineer Intern",
-    place: "Lexon IT Solutions Pvt Ltd",
-    location: "Remote · lexonit.com",
+    title: "Java Backend Developer Intern",
+    place: "Warmbytes",
+    location: "Islamabad, PK · Enterprise Engagement",
     icon: faBriefcase,
     description:
-      "AI Full Stack Development internship — building intelligent web applications, contributing to production codebases, and working under senior engineers in an agile remote environment.",
-  },
-  {
-    year: "2025 – 2026",
-    title: "Software Engineer",
-    place: "Freelance / Projects",
-    location: "Islamabad, PK",
-    icon: faGraduationCap,
-    description: "Built full-stack web apps and REST APIs for clients using .NET, React, and cloud deployment.",
+      "Contributing to backend development for Aik Tijarat, a real-world enterprise application. Developing robust Java & Spring Boot microservices, building secure RESTful APIs, implementing RSA/AES-GCM encryption workflows, and integrating JWT authentication.",
   },
   {
     year: "2022 – 2026",
-    title: "BS Software Engineering",
-    place: "University of Management Sciences",
-    location: "Islamabad, PK",
+    title: "Bachelor of Science in Information Technology (BS IT)",
+    place: "Bahria University",
+    location: "Islamabad, PK · CGPA: 3.1 / 4.0",
     icon: faGraduationCap,
-    description: "Studied OOP, database systems, algorithms, software architecture, and modern development practices.",
+    description:
+      "Core focus on Data Structures & Algorithms, Object-Oriented Programming, Database Systems (DBMS), Software Engineering, Computer Networks, and Cybersecurity.",
   },
 ];
 
 const AboutMe = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <motion.section
       ref={ref}
       id="aboutMey"
-      className="py-20 md:py-28 px-6 md:px-16 bg-gradient-subtle"
+      className="py-28 md:py-40 px-6 sm:px-8 md:px-12 bg-transparent"
     >
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
 
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
           className="text-center mb-16"
         >
           <span className="section-badge">Who I Am</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-heading font-extrabold mb-4 text-foreground">
             About <span className="text-gradient">Me</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            A software engineer who ships real products — not just code.
+          <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
+            A software engineer who ships real, performant products — not just code.
           </p>
         </motion.div>
 
         {/* Profile + Bio grid */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
 
-          {/* Left: Profile card */}
+          {/* Left: Profile card (5 cols) */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            className="lg:col-span-5"
           >
-            <div className="glass-premium rounded-2xl p-8 flex flex-col items-center text-center gap-4">
-              {/* Profile picture with glow ring */}
-              <div className="relative mb-2">
-                <div className="absolute -inset-3 bg-gradient-to-br from-primary to-accent rounded-full opacity-20 blur-xl animate-pulse-slow" />
-                <div className="relative w-64 h-64 rounded-full overflow-hidden
-                                border-4 border-primary/40 shadow-elevated animate-glow-ring">
+            <div className="glass-premium rounded-3xl p-8 flex flex-col items-center text-center gap-6 border border-border shadow-soft group">
+              {/* Profile picture with centered face alignment */}
+              <div className="relative">
+                <div className="absolute -inset-3 bg-gradient-to-br from-primary/30 via-accent/20 to-transparent rounded-full blur-xl animate-pulse-slow pointer-events-none" />
+                <div className="relative w-56 h-56 sm:w-60 sm:h-60 rounded-full overflow-hidden border-4 border-border shadow-elevated bg-card">
                   <img
                     src={profile}
-                    alt="Muhammad Hammad Alamgir — Software Engineer"
-                    className="w-full h-full object-cover object-top scale-125"
+                    alt="Muhammad Hammad Alamgir — Java Backend Developer"
+                    className="w-full h-full object-cover object-[50%_18%] transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
-                    width={256}
-                    height={256}
+                    width={240}
+                    height={240}
                   />
                 </div>
               </div>
 
-              <div>
-                <h3 className="text-2xl font-heading font-bold text-foreground">Hammad Alamgir</h3>
-                <p className="text-primary font-medium mt-1">.NET &amp; React Engineer</p>
+              {/* Name & Role Alignment */}
+              <div className="text-center">
+                <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-foreground tracking-tight">
+                  Muhammad Hammad Alamgir
+                </h3>
+                <p className="text-xs uppercase tracking-widest text-primary font-mono font-bold mt-1.5">
+                  Java Backend Developer
+                </p>
               </div>
 
-              <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+              {/* Location Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/80 border border-border text-xs text-muted-foreground font-medium">
                 <FontAwesomeIcon icon={faMapMarkerAlt} className="w-3.5 h-3.5 text-primary" />
                 Islamabad, Pakistan
               </div>
 
               {/* Quick stats */}
-              <div className="grid grid-cols-3 gap-3 w-full mt-2">
+              <div className="grid grid-cols-3 gap-3 w-full mt-1">
                 {[
                   { n: "3+",  l: "Projects"    },
-                  { n: "10+", l: "Technologies" },
-                  { n: "2+",  l: "Years"        },
+                  { n: "12+", l: "Tech Stack" },
+                  { n: "3.1", l: "BS IT CGPA"  },
                 ].map((s) => (
-                  <div key={s.l} className="rounded-xl bg-primary/8 border border-primary/15 py-2">
-                    <div className="text-xl font-bold text-gradient font-heading">{s.n}</div>
-                    <div className="text-xs text-muted-foreground">{s.l}</div>
+                  <div key={s.l} className="rounded-2xl bg-secondary/80 border border-border py-3 px-2">
+                    <div className="text-lg font-extrabold text-foreground font-heading">{s.n}</div>
+                    <div className="text-[11px] text-muted-foreground font-medium mt-0.5">{s.l}</div>
                   </div>
                 ))}
               </div>
             </div>
           </motion.div>
 
-          {/* Right: Bio + expertise */}
+          {/* Right: Bio + expertise (7 cols) */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-7"
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+            className="lg:col-span-7 space-y-7"
           >
-            <div>
-              <h3 className="text-xl font-heading font-semibold mb-3 text-foreground">My Story</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                I'm a Software Engineer with hands-on experience in{" "}
-                <span className="text-foreground font-medium">C# / ASP.NET Core</span>,{" "}
-                <span className="text-foreground font-medium">React</span>, and{" "}
-                <span className="text-foreground font-medium">SQL Server</span>. I've shipped
-                real applications — from a home diagnostic booking platform to PDF-processing tools
-                and ML-powered recommendation systems.
-              </p>
-            </div>
+            <div className="glass-premium rounded-3xl p-8 border border-border shadow-soft space-y-6">
+              <div>
+                <h3 className="text-xl font-heading font-bold mb-3 text-foreground">Professional Background</h3>
+                <p className="text-muted-foreground leading-relaxed text-base font-normal">
+                  I'm a <span className="text-foreground font-semibold">Java Backend Developer</span> with hands-on experience developing enterprise backend systems, RESTful APIs, and database-driven architectures. Currently contributing to <span className="text-foreground font-semibold">Aik Tijarat</span> at <span className="text-foreground font-semibold">Warmbytes</span> using <span className="text-foreground font-semibold">Java &amp; Spring Boot</span>.
+                </p>
+              </div>
 
-            <div>
-              <p className="text-muted-foreground leading-relaxed">
-                My strength is connecting backend logic to frontend experience: I write
-                optimized stored procedures, design clean REST APIs, and build responsive UIs that
-                users actually enjoy. I care about{" "}
-                <span className="text-foreground font-medium">maintainability, performance,
-                and delivery speed</span> — not just making things work.
-              </p>
-            </div>
+              <div>
+                <p className="text-muted-foreground leading-relaxed text-base font-normal">
+                  My technical foundation spans <span className="text-foreground font-semibold">Spring Security, JWT authentication, RSA &amp; AES-GCM encryption</span>, layered architecture (Controllers, Services, Repositories, DTOs, Entities), and relational databases like <span className="text-foreground font-semibold">MySQL, SQL Server, and PostgreSQL</span>.
+                </p>
+              </div>
 
-            {/* Expertise tags */}
-            <div>
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
-                Core Stack
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {expertise.map((skill, i) => (
-                  <motion.span
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.85 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.4 + i * 0.04 }}
-                    className="tech-badge"
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
+              {/* Expertise tags */}
+              <div>
+                <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
+                  Core Technologies
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {expertise.map((skill, i) => (
+                    <motion.span
+                      key={skill}
+                      initial={{ opacity: 0, scale: 0.85 }}
+                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ delay: 0.4 + i * 0.04 }}
+                      className="tech-badge"
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>
@@ -204,61 +170,43 @@ const AboutMe = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-16"
+          transition={{ duration: 0.5, delay: 0.45, ease: [0.23, 1, 0.32, 1] }}
+          className="mt-24"
         >
-          <h3 className="text-xl font-heading font-semibold mb-6 text-center text-foreground">
-            Experience &amp; Education
-          </h3>
+          <div className="text-center mb-12">
+            <h3 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
+              Experience &amp; Education
+            </h3>
+          </div>
           <div className="space-y-4">
             {timeline.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.6 + i * 0.15 }}
-                className="glass-premium rounded-xl p-5 flex gap-5 items-start hover-lift"
+                transition={{ delay: 0.55 + i * 0.12, ease: [0.23, 1, 0.32, 1] }}
+                className="glass-premium rounded-2xl p-6 flex gap-5 items-start hover-lift border border-border shadow-soft"
               >
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary to-accent
-                                flex items-center justify-center flex-shrink-0 shadow-glow">
-                  <FontAwesomeIcon icon={item.icon} className="w-5 h-5 text-white" />
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20
+                                flex items-center justify-center flex-shrink-0 text-primary shadow-soft">
+                  <FontAwesomeIcon icon={item.icon} className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
-                    <h4 className="font-heading font-semibold text-foreground">{item.title}</h4>
-                    <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <FontAwesomeIcon icon={faCalendar} className="w-3 h-3" />
+                    <h4 className="font-heading font-bold text-foreground text-base md:text-lg">{item.title}</h4>
+                    <span className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+                      <FontAwesomeIcon icon={faCalendar} className="w-3 h-3 text-primary" />
                       {item.year}
                     </span>
                   </div>
-                  <p className="text-sm font-medium text-primary">{item.place}</p>
+                  <p className="text-xs uppercase tracking-wider font-semibold text-primary">{item.place}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">{item.location}</p>
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{item.description}</p>
+                  <p className="text-sm text-muted-foreground mt-2.5 leading-relaxed font-normal">{item.description}</p>
                 </div>
               </motion.div>
             ))}
           </div>
         </motion.div>
-
-        {/* Highlight cards */}
-        <div className="grid md:grid-cols-3 gap-5 mt-12">
-          {highlights.map((item, i) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.7 + i * 0.1 }}
-              className="glass-premium rounded-2xl p-6 hover-lift glow-border"
-            >
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.gradient}
-                              flex items-center justify-center mb-4 shadow-card`}>
-                <FontAwesomeIcon icon={item.icon} className="w-5 h-5 text-white" />
-              </div>
-              <h4 className="font-heading font-bold mb-2 text-foreground">{item.title}</h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
-            </motion.div>
-          ))}
-        </div>
 
       </div>
     </motion.section>

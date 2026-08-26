@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ success: false, error: 'Method Not Allowed' });
   }
 
-  const { name, email, subject, message } = req.body;
+  const { name, email, subject, message } = req.body || {};
 
   // 1. Validation Logic
   if (!name || !email || !message) {
@@ -19,26 +19,37 @@ export default async function handler(req, res) {
     return res.status(400).json({ success: false, error: 'Invalid email address.' });
   }
 
+  const emailUser = process.env.EMAIL_USER || process.env.GMAIL_USER || 'hammadalamgir778@gmail.com';
+  const emailPass = process.env.EMAIL_APP_PASSWORD || process.env.EMAIL_PASS || process.env.GMAIL_PASS;
+
+  if (!emailPass) {
+    console.warn('EMAIL_APP_PASSWORD is not set on server.');
+    return res.status(500).json({
+      success: false,
+      error: 'SMTP credentials not configured on host. Please contact directly via email.',
+    });
+  }
+
   try {
     // 2. Nodemailer Configuration using Gmail SMTP
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_APP_PASSWORD || process.env.EMAIL_PASS, // Use App Password here
+        user: emailUser,
+        pass: emailPass,
       },
     });
 
     // 3. Email Options
     const mailOptions = {
-      from: `"${name}" <${email}>`, // Sender's name and email
-      to: process.env.EMAIL_USER,    // Your receiving email address
+      from: `"${name}" <${emailUser}>`,
+      to: process.env.EMAIL_TO || emailUser,
       replyTo: email,
       subject: subject ? `📩 ${subject} — from ${name}` : `📩 Portfolio Contact from ${name}`,
       text: `New contact from your portfolio:\n\nName: ${name}\nEmail: ${email}\n${subject ? `Subject: ${subject}\n` : ''}Message:\n${message}`,
       html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px 10px 0 0;">
+          <div style="background: linear-gradient(135deg, #1a73e8 0%, #0284c7 100%); padding: 30px; border-radius: 10px 10px 0 0;">
             <h1 style="color: white; margin: 0; text-align: center;">📧 New Contact Message</h1>
           </div>
           
@@ -46,7 +57,7 @@ export default async function handler(req, res) {
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #e9ecef;">
-                  <strong style="color: #667eea;">👤 Name:</strong>
+                  <strong style="color: #1a73e8;">👤 Name:</strong>
                 </td>
                 <td style="padding: 10px 0; border-bottom: 1px solid #e9ecef; color: #333;">
                   ${name}
@@ -54,17 +65,17 @@ export default async function handler(req, res) {
               </tr>
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #e9ecef;">
-                  <strong style="color: #667eea;">📧 Email:</strong>
+                  <strong style="color: #1a73e8;">📧 Email:</strong>
                 </td>
                 <td style="padding: 10px 0; border-bottom: 1px solid #e9ecef;">
-                  <a href="mailto:${email}" style="color: #667eea; text-decoration: none;">${email}</a>
+                  <a href="mailto:${email}" style="color: #1a73e8; text-decoration: none;">${email}</a>
                 </td>
               </tr>
             </table>
             
             <div style="margin-top: 20px;">
-              <strong style="color: #667eea;">💬 Message:</strong>
-              <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #667eea; color: #333;">
+              <strong style="color: #1a73e8;">💬 Message:</strong>
+              <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #1a73e8; color: #333;">
                 ${message.replace(/\n/g, '<br>')}
               </div>
             </div>
@@ -83,6 +94,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ success: true, message: 'Message sent successfully!' });
   } catch (error) {
     console.error('Error sending email:', error);
-    return res.status(500).json({ success: false, error: 'Failed to send message. Please try again later.' });
+    return res.status(500).json({ success: false, error: 'Failed to send message: ' + (error.message || 'Unknown error') });
   }
 }
