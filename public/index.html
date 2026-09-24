@@ -2,73 +2,93 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fafafc" />
+    <meta name="color-scheme" content="light dark" />
 
-    <!-- Primary SEO -->
-    <title>Hammad Alamgir | Java Backend Developer | Spring Boot Engineer</title>
-    <meta name="description" content="Muhammad Hammad Alamgir is a Java Backend Developer specializing in Java, Spring Boot, Spring Security, JWT, RESTful APIs, and relational databases (MySQL, SQL Server, PostgreSQL)." />
-    <meta name="keywords" content="Hammad Alamgir, Java Backend Developer, Spring Boot, Java Developer, Spring Security, JWT, REST APIs, Hibernate, JPA, MySQL, PostgreSQL, SQL Server, Python, Islamabad, Pakistan" />
+    <title>Hammad Alamgir — Java Backend Developer</title>
+    <meta
+      name="description"
+      content="Muhammad Hammad Alamgir is a Java Backend Developer building enterprise applications with Java, Spring Boot, REST APIs, JPA/Hibernate and SQL — including secure APIs, encryption and API Gateway integrations for financial applications."
+    />
     <meta name="author" content="Muhammad Hammad Alamgir" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://hammadalamgir.vercel.app/" />
 
-    <!-- Open Graph (Facebook / LinkedIn) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://hammadalamgir.vercel.app/" />
-    <meta property="og:site_name" content="Hammad Alamgir Portfolio" />
-    <meta property="og:title" content="Hammad Alamgir | Java Backend Developer | Spring Boot" />
-    <meta property="og:description" content="Java Backend Developer specializing in Java, Spring Boot, Spring Security, JWT, and scalable database systems." />
-    <meta property="og:image" content="%PUBLIC_URL%/favicon.png" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Hammad Alamgir" />
+    <meta property="og:title" content="Hammad Alamgir — Java Backend Developer" />
+    <meta
+      property="og:description"
+      content="Java Backend Developer at Warmbytes — Spring Boot, REST APIs, JPA/Hibernate, SQL, Spring Security and API Gateway for enterprise financial applications."
+    />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Hammad Alamgir — Java Backend Developer" />
     <meta property="og:locale" content="en_US" />
+    <meta property="profile:first_name" content="Hammad" />
+    <meta property="profile:last_name" content="Alamgir" />
 
-    <!-- Twitter Card -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Hammad Alamgir | Java Backend Developer" />
-    <meta name="twitter:description" content="Java Backend Developer specializing in Spring Boot, Spring Security, and REST APIs." />
-    <meta name="twitter:image" content="%PUBLIC_URL%/favicon.png" />
+    <meta name="twitter:title" content="Hammad Alamgir — Java Backend Developer" />
+    <meta name="twitter:description" content="Java, Spring Boot, REST APIs and SQL for enterprise financial applications." />
+    <meta name="twitter:image" content="%PUBLIC_URL%/og-image.png" />
 
-    <!-- JSON-LD Person Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Muhammad Hammad Alamgir",
-      "url": "https://hammadalamgir.vercel.app/",
-      "image": "https://hammadalamgir.vercel.app/favicon.png",
-      "jobTitle": "Java Backend Developer",
-      "description": "Java Backend Developer specializing in Java, Spring Boot, Spring Security, JWT, and database-driven systems.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Islamabad",
-        "addressCountry": "PK"
-      },
-      "email": "hammadalamgir778@gmail.com",
-      "telephone": "+923187646051",
-      "sameAs": [
-        "https://github.com/ihammadalamgir",
-        "https://linkedin.com/in/ihammadalamgir"
-      ],
-      "knowsAbout": [
-        "Java", "Spring Boot", "Spring Security", "JWT", "Spring Data JPA",
-        "Hibernate", "REST APIs", "MySQL", "PostgreSQL", "SQL Server", "Python"
-      ]
-    }
-    </script>
+    <!-- Icons -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" sizes="any" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <!-- Performance: Preconnect -->
+    <!-- One variable font file (Inter 400–700) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet" />
 
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <!-- Apply the saved / system theme before first paint (no flash) -->
+    <script>
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("js");
+        var theme = null;
+        try { theme = localStorage.getItem("theme"); } catch (e) {}
+        var dark = theme ? theme === "dark" : window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (dark) {
+          root.classList.add("dark");
+          document.querySelector('meta[name="theme-color"]').setAttribute("content", "#08080a");
+        }
+      })();
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Muhammad Hammad Alamgir",
+        "jobTitle": "Java Backend Developer",
+        "description": "Java Backend Developer experienced in developing and maintaining enterprise applications using Java, Spring Boot, REST APIs, JPA/Hibernate, and SQL.",
+        "email": "mailto:hammadalamgir778@gmail.com",
+        "worksFor": { "@type": "Organization", "name": "Warmbytes" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Islamabad", "addressCountry": "PK" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Bahria University, Islamabad" },
+        "sameAs": ["https://github.com/ihammadalamgir", "https://www.linkedin.com/in/ihammadalamgir"],
+        "knowsAbout": [
+          "Java", "Spring Boot", "REST APIs", "Spring Data JPA", "Hibernate", "JDBC", "Spring Security", "JWT",
+          "RSA", "AES-GCM", "MySQL", "PostgreSQL", "SQL Server", "API Gateway", "Microservices"
+        ]
+      }
+    </script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+      <p style="padding:2rem;font-family:system-ui,sans-serif">
+        Hammad Alamgir — Java Backend Developer.
+        Enable JavaScript to view this portfolio, or email
+        <a href="mailto:hammadalamgir778@gmail.com">hammadalamgir778@gmail.com</a>.
+      </p>
+    </noscript>
     <div id="root"></div>
   </body>
 </html>

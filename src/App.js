@@ -1,38 +1,38 @@
-import React, { Suspense, lazy } from "react";
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Loading from "./components/loading";
-import AnimatedBackground from "./components/AnimatedBackground";
-import CustomCursor from "./components/CustomCursor";
+import useReveal from "./hooks/useReveal";
+import About from "./sections/About";
+import Contact from "./sections/Contact";
+import Education from "./sections/Education";
+import Experience from "./sections/Experience";
+import Footer from "./sections/Footer";
+import Hero from "./sections/Hero";
+import Impact from "./sections/Impact";
+import Projects from "./sections/Projects";
+import Skills from "./sections/Skills";
 
-// Lazy-load below-fold sections for better LCP / performance
-const AboutMe              = lazy(() => import("./pages/About_me"));
-const EngineeringPractices = lazy(() => import("./pages/WhyHireMe"));
-const Skills               = lazy(() => import("./components/Skills"));
-const Projects             = lazy(() => import("./pages/projects"));
-const ContactForm          = lazy(() => import("./components/ContactForm"));
+export default function App() {
+  useReveal();
 
-function App() {
   return (
-    <div className="min-h-screen bg-background text-foreground relative selection:bg-primary selection:text-primary-foreground transition-colors duration-300">
-      <CustomCursor />
-      <AnimatedBackground />
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-fg focus:px-5 focus:py-3 focus:text-bg"
+      >
+        Skip to content
+      </a>
       <Navbar />
-
-      <main className="relative z-10">
-        {/* Hero loads immediately — no lazy needed */}
-        <Home />
-
-        <Suspense fallback={<Loading />}>
-          <AboutMe />
-          <Skills />
-          <Projects />
-          <EngineeringPractices />
-          <ContactForm />
-        </Suspense>
+      <main id="main">
+        <Hero />
+        <About />
+        <Experience />
+        <Skills />
+        <Projects />
+        <Impact />
+        <Education />
+        <Contact />
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }
-
-export default App;

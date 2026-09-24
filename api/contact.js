@@ -1,99 +1,71 @@
-const nodemailer = require('nodemailer');
+// Contact form endpoint — runs as a Vercel serverless function and is reused
+// by server.js for local development. Configure via environment variables:
+//   EMAIL_USER          Gmail address used to send (required)
+//   EMAIL_APP_PASSWORD  Gmail app password (required)
+//   EMAIL_TO            Inbox that receives messages (defaults to EMAIL_USER)
+const nodemailer = require("nodemailer");
 
-export default async function handler(req, res) {
-  // Only allow POST requests
-  if (req.method !== 'POST') {
-    return res.status(405).json({ success: false, error: 'Method Not Allowed' });
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const LIMITS = { name: 120, email: 200, subject: 200, message: 5000 };
+
+const escapeHtml = (value) =>
+  String(value).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+const singleLine = (value) => String(value || "").replace(/[\r\n]+/g, " ").trim();
+
+module.exports = async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ success: false, error: "Method not allowed." });
   }
 
-  const { name, email, subject, message } = req.body || {};
+  const body = req.body || {};
+  const name = singleLine(body.name);
+  const email = singleLine(body.email);
+  const subject = singleLine(body.subject);
+  const message = String(body.message || "").trim();
 
-  // 1. Validation Logic
   if (!name || !email || !message) {
-    return res.status(400).json({ success: false, error: 'All fields are required.' });
+    return res.status(400).json({ success: false, error: "Name, email and message are required." });
+  }
+  if (!EMAIL_PATTERN.test(email)) {
+    return res.status(400).json({ success: false, error: "Please provide a valid email address." });
+  }
+  if (Object.entries({ name, email, subject, message }).some(([key, value]) => value.length > LIMITS[key])) {
+    return res.status(400).json({ success: false, error: "Message is too long." });
   }
 
-  // Basic email format validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({ success: false, error: 'Invalid email address.' });
-  }
-
-  const emailUser = process.env.EMAIL_USER || process.env.GMAIL_USER || 'hammadalamgir778@gmail.com';
-  const emailPass = process.env.EMAIL_APP_PASSWORD || process.env.EMAIL_PASS || process.env.GMAIL_PASS;
-
-  if (!emailPass) {
-    console.warn('EMAIL_APP_PASSWORD is not set on server.');
-    return res.status(500).json({
-      success: false,
-      error: 'SMTP credentials not configured on host. Please contact directly via email.',
-    });
+  const { EMAIL_USER, EMAIL_APP_PASSWORD, EMAIL_TO } = process.env;
+  if (!EMAIL_USER || !EMAIL_APP_PASSWORD) {
+    console.warn("Contact form: EMAIL_USER / EMAIL_APP_PASSWORD are not configured.");
+    return res.status(503).json({ success: false, error: "Email delivery is not configured." });
   }
 
   try {
-    // 2. Nodemailer Configuration using Gmail SMTP
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: emailUser,
-        pass: emailPass,
-      },
+      service: "gmail",
+      auth: { user: EMAIL_USER, pass: EMAIL_APP_PASSWORD },
     });
 
-    // 3. Email Options
-    const mailOptions = {
-      from: `"${name}" <${emailUser}>`,
-      to: process.env.EMAIL_TO || emailUser,
+    const title = subject || `Portfolio contact from ${name}`;
+    await transporter.sendMail({
+      from: `"Portfolio contact" <${EMAIL_USER}>`,
+      to: EMAIL_TO || EMAIL_USER,
       replyTo: email,
-      subject: subject ? `📩 ${subject} — from ${name}` : `📩 Portfolio Contact from ${name}`,
-      text: `New contact from your portfolio:\n\nName: ${name}\nEmail: ${email}\n${subject ? `Subject: ${subject}\n` : ''}Message:\n${message}`,
+      subject: title,
+      text: `From: ${name} <${email}>\n${subject ? `Subject: ${subject}\n` : ""}\n${message}`,
       html: `
-        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="background: linear-gradient(135deg, #1a73e8 0%, #0284c7 100%); padding: 30px; border-radius: 10px 10px 0 0;">
-            <h1 style="color: white; margin: 0; text-align: center;">📧 New Contact Message</h1>
-          </div>
-          
-          <div style="background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e9ecef;">
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <td style="padding: 10px 0; border-bottom: 1px solid #e9ecef;">
-                  <strong style="color: #1a73e8;">👤 Name:</strong>
-                </td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #e9ecef; color: #333;">
-                  ${name}
-                </td>
-              </tr>
-              <tr>
-                <td style="padding: 10px 0; border-bottom: 1px solid #e9ecef;">
-                  <strong style="color: #1a73e8;">📧 Email:</strong>
-                </td>
-                <td style="padding: 10px 0; border-bottom: 1px solid #e9ecef;">
-                  <a href="mailto:${email}" style="color: #1a73e8; text-decoration: none;">${email}</a>
-                </td>
-              </tr>
-            </table>
-            
-            <div style="margin-top: 20px;">
-              <strong style="color: #1a73e8;">💬 Message:</strong>
-              <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #1a73e8; color: #333;">
-                ${message.replace(/\n/g, '<br>')}
-              </div>
-            </div>
-          </div>
-          
-          <div style="text-align: center; padding: 20px; color: #6c757d; font-size: 12px;">
-            <p>This email was sent from your portfolio contact form</p>
-          </div>
-        </div>
-      `,
-    };
+        <div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#16161a">
+          <p style="margin:0 0 4px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6242f0">Portfolio contact</p>
+          <h1 style="margin:0 0 20px;font-size:20px">${escapeHtml(title)}</h1>
+          <p style="margin:0 0 4px"><strong>${escapeHtml(name)}</strong></p>
+          <p style="margin:0 0 20px"><a href="mailto:${escapeHtml(email)}" style="color:#6242f0">${escapeHtml(email)}</a></p>
+          <div style="padding:16px;border-radius:12px;background:#f2f2f6;white-space:pre-wrap;line-height:1.6">${escapeHtml(message)}</div>
+        </div>`,
+    });
 
-    // 4. Send Email
-    await transporter.sendMail(mailOptions);
-
-    return res.status(200).json({ success: true, message: 'Message sent successfully!' });
+    return res.status(200).json({ success: true });
   } catch (error) {
-    console.error('Error sending email:', error);
-    return res.status(500).json({ success: false, error: 'Failed to send message: ' + (error.message || 'Unknown error') });
+    console.error("Contact form: failed to send email", error);
+    return res.status(500).json({ success: false, error: "Failed to send message." });
   }
-}
+};
