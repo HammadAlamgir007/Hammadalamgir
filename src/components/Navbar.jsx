@@ -4,6 +4,9 @@ import useActiveSection from "../hooks/useActiveSection";
 import useTheme from "../hooks/useTheme";
 import Icon from "./Icon";
 
+// useLayoutEffect warns during the build-time prerender (no DOM there); fall back to useEffect on the server.
+const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
+
 export default function Navbar() {
   const active = useActiveSection(navItems.map((item) => item.id));
   const { isDark, toggle } = useTheme();
@@ -24,7 +27,7 @@ export default function Navbar() {
   }, []);
 
   // Orange underline that slides under the active link's text.
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const measure = () => {
       const label = linksRef.current?.querySelector(`[data-id="${active}"] span`);
       setIndicator(label ? { x: label.offsetLeft, w: label.offsetWidth } : null);

@@ -35,6 +35,14 @@ npm run lint       # ESLint, zero warnings allowed
 npm run build      # production build
 ```
 
+## SEO
+
+- **Prerendered HTML.** `npm run build` runs `react-scripts build` and then `scripts/prerender.mjs`, which renders the app with `react-dom/server` into `build/index.html`. Crawlers and link previews get the full page without JavaScript; the browser hydrates it (`src/index.js`). Code that touches `window`/`document` must do so in effects, not during render, or the prerender fails.
+- **Site address.** The canonical URL in `public/index.html` is the single source of truth; the prerender reads it to write `build/sitemap.xml`. If the domain changes (for example to an is-a.dev subdomain), update every `https://hammadalamgir-wec3.vercel.app` in `public/index.html` and `public/robots.txt`.
+- **Structured data.** `public/index.html` holds JSON-LD for a `ProfilePage` about a `Person`; `dateModified` is stamped at build time.
+- **Share previews.** `og:image` / `twitter:image` use absolute URLs to `public/og-image.png` (1200×630).
+- **404s.** Unknown URLs return a real 404 (`public/404.html`) instead of the home page.
+
 ## Deployment
 
 Hosted on Vercel from the GitHub repository [HammadAlamgir007/Hammadalamgir](https://github.com/HammadAlamgir007/Hammadalamgir). Every pushed branch gets a preview URL; `main` deploys to production. `vercel.json` routes `/api/*` to the serverless contact function and everything else to the app.

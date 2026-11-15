@@ -4,7 +4,8 @@ import { profile, socials } from "../data/portfolio";
 export default function Footer() {
   return (
     <footer className="container-page flex flex-col items-center justify-between gap-4 py-10 text-sm text-muted sm:flex-row">
-      <p>
+      {/* The build year can differ from the visitor's year after New Year — don't treat that as a hydration error. */}
+      <p suppressHydrationWarning>
         © {new Date().getFullYear()} {profile.fullName ?? profile.name} · {profile.shortRole}
       </p>
       <div className="flex items-center gap-1">

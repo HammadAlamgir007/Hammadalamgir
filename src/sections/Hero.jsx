@@ -37,6 +37,8 @@ export default function Hero() {
               <span className="enter eyebrow mb-7 flex" style={{ "--i": 0 }}>
                 {profile.name} · {profile.role}
               </span>
+              {/* Separator for search engines and screen readers; the label above is visually its own line. */}
+              <span className="sr-only"> — </span>
               <span className="enter t-display block" style={{ "--i": 1 }}>
                 {hero.title} <span className="text-accent-ink">{hero.titleAccent}</span>
               </span>

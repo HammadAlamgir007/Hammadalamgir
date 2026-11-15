@@ -14,11 +14,19 @@ function readStored() {
  * Light/dark theme. The initial class is set by an inline script in
  * public/index.html (no flash); this hook keeps React in sync and follows
  * the OS preference until the visitor picks a theme explicitly.
+ *
+ * State starts as `null` (unknown) so the prerendered HTML and the first
+ * client render match; the real theme is read from the page after mount.
  */
 export default function useTheme() {
-  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains("dark"));
+  const [isDark, setIsDark] = useState(null);
 
   useEffect(() => {
+    setIsDark(document.documentElement.classList.contains("dark"));
+  }, []);
+
+  useEffect(() => {
+    if (isDark === null) return;
     document.documentElement.classList.toggle("dark", isDark);
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isDark ? "#1a1714" : "#ffffff");
   }, [isDark]);
@@ -44,5 +52,5 @@ export default function useTheme() {
     });
   }, []);
 
-  return { isDark, toggle };
+  return { isDark: isDark === true, toggle };
 }
