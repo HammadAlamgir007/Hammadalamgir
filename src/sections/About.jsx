@@ -1,7 +1,7 @@
-import { Fragment } from "react";
+import { Dot, Sparkle } from "../components/Decor";
+import Icon from "../components/Icon";
 import SectionHeader from "../components/SectionHeader";
-import Window from "../components/Window";
-import { facts, profile, sections } from "../data/portfolio";
+import { education, facts, profile, sections } from "../data/portfolio";
 
 export default function About() {
   return (
@@ -9,52 +9,63 @@ export default function About() {
       <div className="container-page">
         <SectionHeader
           id="about-title"
-          eyebrow="About"
+          index="01"
+          eyebrow="About me"
           title={
             <>
-              {sections.about.title} <span className="text-gradient">{sections.about.titleAccent}</span>
+              {sections.about.title} <span className="text-accent-ink">{sections.about.titleAccent}</span>
             </>
           }
         />
 
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="space-y-6 text-[1.0625rem] leading-relaxed text-fg-2 lg:col-span-7">
-            {profile.summary.map((paragraph, i) => (
-              <p key={i} data-reveal style={{ "--i": i }} className={i === 0 ? "t-lead font-medium text-fg" : undefined}>
-                {paragraph}
+          <div className="lg:col-span-7">
+            <div className="space-y-5 text-[1.0625rem] leading-relaxed text-fg-2">
+              {profile.story.map((paragraph, i) => (
+                <p key={i} data-reveal style={{ "--i": i }} className={i === 0 ? "t-lead text-fg" : undefined}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            <blockquote data-reveal className="relative mt-12 border-l-[3px] border-accent pl-6">
+              <Sparkle tone="amber" size={20} style={{ right: 0, top: -30 }} />
+              <Dot tone="blue" size={6} style={{ right: 30, top: -14 }} />
+              <p className="font-display text-xl font-semibold leading-snug tracking-tight text-fg sm:text-2xl">
+                “{profile.belief}”
               </p>
-            ))}
+            </blockquote>
           </div>
 
-          {/* "About This Mac"-style card */}
-          <Window data-reveal="scale" className="card self-start lg:col-span-5">
-            <div className="px-6 pb-8 pt-4 text-center sm:px-8">
-              <span aria-hidden="true" className="tile tile-blue mx-auto h-20 w-20 text-2xl font-bold tracking-tight">
-                {profile.initials}
-              </span>
-              <p className="mt-5 text-xl font-semibold tracking-tight text-fg">{profile.fullName ?? profile.name}</p>
-              <p className="mt-0.5 text-sm text-muted">{profile.role}</p>
+          <div data-reveal style={{ "--i": 1 }} className="card self-start p-6 sm:p-8 lg:col-span-5">
+            <p className="t-label text-muted">At a glance</p>
+            <dl className="mt-4 divide-y divide-line">
+              {facts.map((fact) => (
+                <div key={fact.label} className="flex items-baseline justify-between gap-6 py-3">
+                  <dt className="text-sm text-muted">{fact.label}</dt>
+                  <dd className="text-right text-[0.9375rem] font-medium text-fg">{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
 
-              <dl className="mx-auto mt-7 grid max-w-sm grid-cols-[auto_1fr] gap-x-4 gap-y-2.5 text-left text-sm">
-                {facts.map((fact) => (
-                  <Fragment key={fact.label}>
-                    <dt className="text-right text-muted">{fact.label}</dt>
-                    <dd className="font-medium text-fg">{fact.value}</dd>
-                  </Fragment>
-                ))}
-              </dl>
+            {education.map((item) => (
+              <div key={item.degree} className="mt-5 flex items-start gap-4 rounded-2xl bg-bg-2 p-4">
+                <span className="icon-tile h-10 w-10" aria-hidden="true">
+                  <Icon name="graduation" className="h-5 w-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="font-semibold leading-snug text-fg">{item.degree}</p>
+                  <p className="text-sm text-fg-2">{item.school}</p>
+                  <p className="t-meta mt-1 text-muted">{item.notes.join(" · ")}</p>
+                </div>
+              </div>
+            ))}
 
-              <a
-                href={profile.cv}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="More info: view resume (PDF)"
-                className="btn btn-plain mt-8 !min-h-[36px] !px-5 text-sm"
-              >
-                More Info…
-              </a>
-            </div>
-          </Window>
+            <a href={profile.cv} target="_blank" rel="noopener noreferrer" className="btn btn-outline mt-6 w-full">
+              View full CV
+              <Icon name="arrowUpRight" className="h-4 w-4" />
+            </a>
+          </div>
         </div>
       </div>
     </section>

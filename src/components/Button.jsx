@@ -1,10 +1,7 @@
-import { useMagnetic } from "../hooks/usePointerEffects";
-
-/** Link styled as a button, with magnetic hover on fine pointers. */
-export default function Button({ variant = "primary", className = "", children, ...props }) {
-  const ref = useMagnetic();
+/** Link styled as a button. Variants: primary (orange) and outline. */
+export default function Button({ variant = "primary", size, className = "", children, ...props }) {
   return (
-    <a ref={ref} className={`btn btn-${variant} ${className}`} {...props}>
+    <a className={`btn btn-${variant} ${size === "sm" ? "btn-sm" : ""} ${className}`} {...props}>
       {children}
     </a>
   );

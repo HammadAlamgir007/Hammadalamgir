@@ -14,9 +14,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint --max-warnings=0 src api server.js",
-    "server": "node server.js",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "server": "node server.js"
   },
   "eslintConfig": {
     "extends": [
@@ -43,7 +41,6 @@
     "autoprefixer": "^10.4.21",
     "dotenv": "^16.6.1",
     "express": "^4.22.3",
-    "gh-pages": "^6.1.1",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.1"
   }

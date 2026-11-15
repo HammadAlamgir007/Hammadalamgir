@@ -1,7 +1,6 @@
 import { useState } from "react";
+import { Dot, Sparkle } from "../components/Decor";
 import Icon from "../components/Icon";
-import Window from "../components/Window";
-import { useMagnetic } from "../hooks/usePointerEffects";
 import { profile, sections, socials } from "../data/portfolio";
 
 const EMPTY = { name: "", email: "", subject: "", message: "" };
@@ -34,11 +33,9 @@ function CopyEmail() {
   );
 }
 
-/** Mail-style compose window. */
 function ContactForm() {
   const [form, setForm] = useState(EMPTY);
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
-  const submitRef = useMagnetic();
 
   const update = (event) => {
     const { name, value } = event.target;
@@ -73,13 +70,18 @@ function ContactForm() {
   );
 
   return (
-    <Window as="form" title="New Message" onSubmit={submit} data-reveal style={{ "--i": 1 }} className="card self-start">
-      <p className="flex items-center gap-2 border-b border-fg/[0.07] px-6 py-3 text-sm sm:px-8">
-        <span className="text-muted">To:</span>
-        <span className="rounded-full bg-accent/10 px-2.5 py-0.5 font-medium text-accent">{profile.name}</span>
-      </p>
+    <form
+      onSubmit={submit}
+      aria-labelledby="contact-form-title"
+      data-reveal
+      style={{ "--i": 1 }}
+      className="card self-start p-6 sm:p-8"
+    >
+      <h3 id="contact-form-title" className="t-h3">
+        Send a message
+      </h3>
 
-      <div className="space-y-5 p-6 sm:p-8">
+      <div className="mt-6 space-y-5">
         <div className="grid gap-5 sm:grid-cols-2">
           {field("name", "Name", { autoComplete: "name", required: true })}
           {field("email", "Email", { type: "email", autoComplete: "email", required: true })}
@@ -106,17 +108,17 @@ function ContactForm() {
           />
         </div>
 
-        <button ref={submitRef} type="submit" disabled={status === "sending"} className="btn btn-primary w-full disabled:opacity-60">
+        <button type="submit" disabled={status === "sending"} className="btn btn-primary w-full disabled:opacity-60">
           {status === "sending" ? "Sending…" : "Send message"}
           <Icon name="send" className="h-4 w-4" />
         </button>
 
         <div aria-live="polite" className="text-center text-sm">
-          {status === "sent" && <p className="font-medium text-accent-2">Thanks — your message was sent.</p>}
+          {status === "sent" && <p className="font-medium text-fg">Thanks — your message was sent.</p>}
           {status === "error" && (
             <p className="text-fg-2">
               The form couldn't be delivered right now.{" "}
-              <a href={mailtoFor(form)} className="font-semibold text-accent underline underline-offset-4">
+              <a href={mailtoFor(form)} className="text-link">
                 Send it from your email app instead
               </a>
               .
@@ -124,75 +126,81 @@ function ContactForm() {
           )}
         </div>
       </div>
-    </Window>
+    </form>
   );
 }
 
 export default function Contact() {
   const rows = [
-    { icon: "mail", tint: "sky", label: "Email", value: profile.email, href: `mailto:${profile.email}`, extra: <CopyEmail /> },
+    { icon: "mail", label: "Email", value: profile.email, href: `mailto:${profile.email}`, extra: <CopyEmail /> },
     ...socials
       .filter((s) => s.href.startsWith("http"))
-      .map((s) => ({ icon: s.icon, tint: s.tint, label: s.label, value: s.handle, href: s.href, external: true })),
-    { icon: "phone", tint: "green", label: "Phone", value: profile.phone, href: profile.phoneHref },
-    { icon: "pin", tint: "red", label: "Location", value: [profile.location, profile.relocation].filter(Boolean).join(" · ") },
+      .map((s) => ({ icon: s.icon, label: s.label, value: s.handle, href: s.href, external: true })),
+    { icon: "phone", label: "Phone", value: profile.phone, href: profile.phoneHref },
+    { icon: "pin", label: "Location", value: profile.location },
   ];
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="section">
-      <div className="container-page grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <div>
-          <p data-reveal className="glass eyebrow mb-6">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
-            Contact
-          </p>
-          <h2 id="contact-title" data-reveal style={{ "--i": 1 }} className="t-h1">
-            Let's build something <span className="text-gradient">meaningful.</span>
-          </h2>
-          <p data-reveal style={{ "--i": 2 }} className="t-lead mt-6 max-w-lg text-fg-2">
-            {sections.contact.intro}
-          </p>
+    <section id="contact" aria-labelledby="contact-title" className="section !pt-8 md:!pt-12">
+      <div className="container-page">
+        <div className="relative grid gap-12 overflow-hidden rounded-[2rem] bg-bg-2 p-6 ring-1 ring-line sm:p-10 lg:grid-cols-2 lg:gap-16 lg:p-14">
+          <Sparkle tone="amber" size={18} style={{ right: 22, top: 20 }} />
+          <Sparkle tone="blue" size={14} delay={1.4} className="hidden sm:block" style={{ left: "46%", top: 28 }} />
+          <Dot tone="green" size={7} className="hidden sm:block" style={{ left: 22, bottom: 22 }} />
+          <Dot tone="red" size={6} className="hidden sm:block" style={{ right: "48%", bottom: 30 }} />
+          <div>
+            <p data-reveal className="eyebrow mb-5">
+              <span className="font-mono tracking-normal text-muted">07</span>
+              Contact
+            </p>
+            <h2 id="contact-title" data-reveal style={{ "--i": 1 }} className="t-h1">
+              {sections.contact.title} <span className="text-accent-ink">{sections.contact.titleAccent}</span>
+            </h2>
+            <p data-reveal style={{ "--i": 2 }} className="t-lead mt-5 max-w-lg text-fg-2">
+              {sections.contact.intro}
+            </p>
 
-          {/* System Settings–style grouped list */}
-          <ul
-            data-reveal
-            style={{ "--i": 3, "--sep-inset": "4.25rem", "--sep-end": "0.75rem" }}
-            className="card settings-group mt-10 !rounded-[1.375rem] p-1.5"
-          >
-            {rows.map((row) => {
-              const content = (
-                <>
-                  <span className={`tile tile-${row.tint} h-9 w-9`} aria-hidden="true">
-                    <Icon name={row.icon} className="h-[18px] w-[18px]" />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-xs font-medium text-muted">{row.label}</span>
-                    <span className="block truncate font-medium text-fg">{row.value}</span>
-                  </span>
-                </>
-              );
-              return (
-                <li key={row.label} className="flex items-center gap-1 pr-1">
-                  {row.href ? (
-                    <a
-                      href={row.href}
-                      className="group flex min-w-0 flex-1 items-center gap-3.5 rounded-2xl px-3 py-3 transition-colors hover:bg-fg/[0.04]"
-                      {...(row.external && { target: "_blank", rel: "noopener noreferrer" })}
-                    >
-                      {content}
-                      {row.external && <Icon name="arrowUpRight" className="ml-auto h-4 w-4 shrink-0 text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />}
-                    </a>
-                  ) : (
-                    <div className="flex min-w-0 flex-1 items-center gap-3.5 px-3 py-3">{content}</div>
-                  )}
-                  {row.extra}
-                </li>
-              );
-            })}
-          </ul>
+            <ul data-reveal style={{ "--i": 3 }} className="mt-10 divide-y divide-line border-y border-line">
+              {rows.map((row) => {
+                const content = (
+                  <>
+                    <span className="icon-tile h-10 w-10" aria-hidden="true">
+                      <Icon name={row.icon} className="h-[18px] w-[18px]" />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-xs font-medium text-muted">{row.label}</span>
+                      <span className="block truncate font-medium text-fg">{row.value}</span>
+                    </span>
+                  </>
+                );
+                return (
+                  <li key={row.label} className="flex items-center gap-1">
+                    {row.href ? (
+                      <a
+                        href={row.href}
+                        className="group flex min-w-0 flex-1 items-center gap-4 py-3.5"
+                        {...(row.external && { target: "_blank", rel: "noopener noreferrer" })}
+                      >
+                        {content}
+                        {row.external && (
+                          <Icon
+                            name="arrowUpRight"
+                            className="ml-auto h-4 w-4 shrink-0 text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                          />
+                        )}
+                      </a>
+                    ) : (
+                      <div className="flex min-w-0 flex-1 items-center gap-4 py-3.5">{content}</div>
+                    )}
+                    {row.extra}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <ContactForm />
         </div>
-
-        <ContactForm />
       </div>
     </section>
   );

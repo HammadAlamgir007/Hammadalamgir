@@ -59,11 +59,13 @@ function Role({ job, index }) {
       <span
         aria-hidden="true"
         className={`absolute left-[3px] top-2 h-[11px] w-[11px] rounded-full border-2 md:left-[calc(11rem+1.25rem-5px)] ${
-          isCurrent ? "border-accent bg-accent shadow-[0_0_0_4px_rgb(var(--accent)/0.18)]" : "border-fg/20 bg-bg"
+          isCurrent
+            ? "border-accent bg-accent shadow-[0_0_0_4px_rgb(var(--accent)/0.2)]"
+            : "border-[rgb(var(--field-edge))] bg-bg-2"
         }`}
       />
 
-      <div data-reveal="left" className="md:pt-0.5 md:text-right">
+      <div data-reveal className="md:pt-0.5 md:text-right">
         <p className="t-meta text-fg-2">
           <time>{job.start}</time>
           {job.end && (
@@ -74,7 +76,7 @@ function Role({ job, index }) {
           )}
         </p>
         {isCurrent && (
-          <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-accent-2/10 px-2.5 py-0.5 text-xs font-semibold text-accent-2">
+          <p className="mt-2 inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold text-accent-ink ring-1 ring-inset ring-accent/60">
             Current
           </p>
         )}
@@ -93,7 +95,7 @@ function Role({ job, index }) {
         <ul id={listId} className="mt-5 space-y-3 text-[0.9375rem] leading-relaxed text-fg-2">
           {points.map((point) => (
             <li key={point} className="relative pl-5">
-              <span aria-hidden="true" className="absolute left-0 top-[0.7em] h-1 w-1 rounded-full bg-accent/70" />
+              <span aria-hidden="true" className="absolute left-0 top-[0.7em] h-1.5 w-1.5 rounded-full bg-accent" />
               {point}
             </li>
           ))}
@@ -105,7 +107,7 @@ function Role({ job, index }) {
             onClick={() => setExpanded((v) => !v)}
             aria-expanded={expanded}
             aria-controls={listId}
-            className="mt-4 inline-flex min-h-[40px] items-center gap-1.5 rounded-full text-sm font-semibold text-accent hover:underline"
+            className="mt-4 inline-flex min-h-[40px] items-center gap-1.5 rounded-full text-sm font-semibold text-accent-ink hover:underline hover:underline-offset-4"
           >
             {expanded ? "Show less" : `Show ${hidden} more`}
             <Icon name="chevronDown" className={`h-4 w-4 transition-transform duration-300 ${expanded ? "rotate-180" : ""}`} />
@@ -132,6 +134,7 @@ export default function Experience() {
       <div className="container-page">
         <SectionHeader
           id="experience-title"
+          index="03"
           eyebrow="Experience"
           title={sections.experience.title}
           intro={sections.experience.intro}
@@ -139,8 +142,8 @@ export default function Experience() {
 
         <div className="relative">
           {/* Rail + scroll-driven fill */}
-          <div aria-hidden="true" className="absolute bottom-2 left-2 top-2 w-px bg-fg/10 md:left-[calc(11rem+1.25rem)]">
-            <div ref={fillRef} className="h-full w-full origin-top scale-y-0 bg-gradient-to-b from-accent to-accent-3" />
+          <div aria-hidden="true" className="absolute bottom-2 left-2 top-2 w-px bg-line md:left-[calc(11rem+1.25rem)]">
+            <div ref={fillRef} className="h-full w-full origin-top scale-y-0 bg-accent" />
           </div>
 
           <ol ref={listRef} className="space-y-10 md:space-y-14">

@@ -1,9 +1,10 @@
 import Navbar from "./components/Navbar";
 import useReveal from "./hooks/useReveal";
 import About from "./sections/About";
+import Beyond from "./sections/Beyond";
 import Contact from "./sections/Contact";
-import Education from "./sections/Education";
 import Experience from "./sections/Experience";
+import Fintech from "./sections/Fintech";
 import Footer from "./sections/Footer";
 import Hero from "./sections/Hero";
 import Projects from "./sections/Projects";
@@ -20,15 +21,15 @@ export default function App() {
       >
         Skip to content
       </a>
-      <div className="wallpaper" aria-hidden="true" />
       <Navbar />
       <main id="main">
         <Hero />
         <About />
+        <Fintech />
         <Experience />
-        <Skills />
         <Projects />
-        <Education />
+        <Skills />
+        <Beyond />
         <Contact />
       </main>
       <Footer />

@@ -20,25 +20,33 @@ export const profile = {
   phoneHref: "tel:+923187646051",
   cv: "/files/Hammad-Alamgir.pdf",
   photo: {
-    src: photo192,
+    src: photo384,
     srcSet: `${photo192} 192w, ${photo384} 384w`,
     alt: "Portrait of Hammad Alamgir",
   },
-  status: "Currently at Warmbytes — backend for the Aik Tijarat merchant-banking app",
+  specialty: "Fintech & Payments",
+  status: "Currently building Aik Tijarat, a merchant-banking backend, at Warmbytes.",
   headline:
-    "Production merchant-banking backends in Java 17 and Spring Boot 3 — passkey login, RSA-encrypted credentials, Redis-based session control and payment integrations.",
-  summary: [
-    "I'm a Java Backend Developer at Warmbytes, where I build and support Aik Tijarat — a production merchant-banking backend serving mobile and portal clients.",
-    "It integrates with two core banks, card and payment switches, and national ID verification. My work spans passkey (FIDO2) login, RSA-encrypted credentials, Redis-based session and rate control, the Aik Khata credit-ledger module and NFC Tap to Pay.",
-    "Alongside features, I handle production deployments and hotfixes, write migration scripts, and triage live issues from server logs on UAT and production.",
+    "I'm Hammad, a Java Backend Developer specialising in fintech and payments. At Warmbytes I build secure, reliable backends for a production merchant-banking app with Java 17, Spring Boot 3, PostgreSQL and Redis.",
+  /** About — the professional story, first paragraph is the lead. */
+  story: [
+    "I'm a Bahria University IT graduate who moved into backend development through two internships — first as a software developer at Lexon IT, then as a Java backend intern at Warmbytes — and now work there as a Java Backend Developer.",
+    "Today I build and support Aik Tijarat, a production merchant-banking backend serving mobile and portal clients. It connects to two core banks, card and payment switches and national ID verification, so most of my work sits where security and reliability matter: passkey (FIDO2) login, RSA-encrypted credentials, Redis-based session control, the Aik Khata credit ledger and NFC Tap to Pay.",
+    "Alongside features, I handle production deployments and hotfixes, write migration scripts and triage live issues from server logs on UAT and production.",
   ],
+  belief:
+    "Good software is not just about writing code. It's about understanding problems, building thoughtful solutions, and creating experiences people can rely on.",
 };
 
-/** `tint` picks the app-icon colour used in the Dock and contact list. */
+export const hero = {
+  title: "Building reliable systems.",
+  titleAccent: "Solving real problems.",
+};
+
 export const socials = [
-  { label: "GitHub", href: "https://github.com/ihammadalamgir", handle: "ihammadalamgir", icon: "github", tint: "graphite" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/ihammadalamgir", handle: "in/ihammadalamgir", icon: "linkedin", tint: "linkedin" },
-  { label: "Email", href: `mailto:${profile.email}`, handle: profile.email, icon: "mail", tint: "sky" },
+  { label: "GitHub", href: "https://github.com/HammadAlamgir007", handle: "HammadAlamgir007", icon: "github" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/ihammadalamgir", handle: "in/ihammadalamgir", icon: "linkedin" },
+  { label: "Email", href: `mailto:${profile.email}`, handle: profile.email, icon: "mail" },
 ];
 
 /** Section headings and intros. */
@@ -51,36 +59,100 @@ export const sections = {
     title: "From intern to Java backend developer at Warmbytes.",
     intro: "Three roles across Warmbytes and Lexon IT — from Spring Boot features and REST APIs to building and supporting a production merchant-banking backend.",
   },
-  skills: {
-    title: "Java and Spring Boot at the core, with security and data alongside.",
-    intro: "From my CV and production work: the stack behind a live merchant-banking backend, plus the tools and fundamentals around it.",
-  },
   projects: {
     title: "Financial, healthcare and academic backends.",
-    intro: "A production merchant-banking backend in depth, followed by a diagnostics platform and a hands-on Spring Boot system.",
+    intro: "A production merchant-banking backend in depth — the problem, my part, the decisions and the result — followed by a diagnostics platform and a hands-on Spring Boot system.",
   },
-  education: {
-    title: "A foundation in Information Technology.",
+  skills: {
+    title: "Technologies I work with.",
+    intro: "Java and Spring Boot at the core, with security, data and integrations around them — the stack behind a live merchant-banking backend.",
   },
   contact: {
-    intro: `Based in ${profile.location}. The fastest way to reach me is email, LinkedIn or GitHub.`,
+    title: "Let's build something",
+    titleAccent: "meaningful.",
+    intro: "Have an opportunity, an interesting project, or simply want to connect? I'd love to hear from you.",
   },
 };
 
-/** Hero cards — from the CV and the Aik Tijarat commit history. */
+/** Hero proof strip — from the CV and the Aik Tijarat commit history. `tone` colours the number. */
 export const highlights = [
-  { value: "FIDO2", label: "Passkey login with MPIN fallback" },
-  { value: "Redis", label: "Sessions, lockouts & duplicate-payment guard" },
-  { value: "2", label: "Core banks integrated: iMAL & MicroBank" },
-  { value: "~4,700", label: "Lines in the Aik Khata ledger module" },
+  { value: "FIDO2", label: "Passkey login with MPIN fallback", tone: "blue" },
+  { value: "Redis", label: "Sessions, lockouts & duplicate-payment guard", tone: "orange" },
+  { value: "2", label: "Core banks integrated: iMAL & MicroBank", tone: "green" },
+  { value: "~4,700", label: "Lines in the Aik Khata ledger module", tone: "amber" },
 ];
+
+/**
+ * Fintech & payments specialisation — every line is drawn from the CV and the
+ * Aik Tijarat notes below. `tone` picks the mini colour of each icon.
+ */
+export const fintech = {
+  title: "Specialised in",
+  titleAccent: "banking and payment systems.",
+  intro:
+    "Most of my work sits inside a production merchant-banking backend — where money moves, identities are verified and every request has to be secure and traceable.",
+  flowTitle: "How a payment request moves through the backend",
+  flowNote: "Simplified",
+  flow: [
+    { title: "Secure request", text: "The app encrypts the MPIN with RSA-OAEP before it leaves the device.", icon: "lock", tone: "blue" },
+    { title: "Verified session", text: "A hardened JWT filter and a Redis single-session check reject stale or blacklisted tokens.", icon: "person", tone: "orange" },
+    { title: "Duplicate guard", text: "An atomic Redis SETNX check with a time window blocks double payments.", icon: "bolt", tone: "amber" },
+    { title: "Payment rail", text: "IBFT through Euronet, Raast QR or a wallet transfer.", icon: "card", tone: "green" },
+    { title: "Core banking", text: "Integrated with two core banking systems: iMAL and MicroBank.", icon: "server", tone: "blue" },
+    { title: "Notify & trace", text: "Transaction alerts and push go out; external calls land in the integration log with a request ID.", icon: "bell", tone: "red" },
+  ],
+  areas: [
+    {
+      title: "Payments & transfers",
+      icon: "card",
+      tone: "green",
+      text: "Request to Pay, interbank transfers (IBFT) through Euronet, Raast QR payments, wallet-to-core and wallet-to-wallet transfers, bills, top-ups and fee payments.",
+      tags: ["IBFT", "Raast QR", "Request to Pay", "Wallet transfers"],
+    },
+    {
+      title: "Banking security",
+      icon: "lock",
+      tone: "blue",
+      text: "Passkey (FIDO2) login with an MPIN fallback, RSA-OAEP encrypted MPIN and OTP, a two-device limit and every VAPT finding closed.",
+      tags: ["FIDO2", "RSA-OAEP", "JWT", "VAPT"],
+    },
+    {
+      title: "Core banking integration",
+      icon: "server",
+      tone: "orange",
+      text: "Onboarding for new and existing customers across iMAL and MicroBank, merchant upgrades with portal approval, and account-lifecycle APIs.",
+      tags: ["iMAL", "MicroBank", "Onboarding"],
+    },
+    {
+      title: "Cards & Tap to Pay",
+      icon: "contactless",
+      tone: "amber",
+      text: "The debit card lifecycle — issuance, activation, PIN, block and limits — and onboarding APIs for the NFC Tap to Pay SDK over mTLS with signed requests.",
+      tags: ["Debit cards", "NFC", "mTLS", "JWS"],
+    },
+    {
+      title: "Merchant credit ledger",
+      icon: "book",
+      tone: "red",
+      text: "Aik Khata: customers, transactions, payment allocations, QR collection codes with expiry, credit limits and an overdue-account scheduler.",
+      tags: ["Aik Khata", "QR collection", "Scheduler"],
+    },
+    {
+      title: "Identity & compliance",
+      icon: "person",
+      tone: "blue",
+      text: "NADRA CNIC verification, CNIC-expiry checks and reminders, masking of card numbers, mobile numbers and IBANs in logs, and account certificates.",
+      tags: ["NADRA CNIC", "Log masking", "Certificates"],
+    },
+  ],
+};
 
 export const facts = [
   { label: "Role", value: "Java Backend Developer" },
+  { label: "Focus", value: "Fintech · payments · banking" },
   { label: "Current", value: "Warmbytes" },
   { label: "Product", value: "Aik Tijarat · merchant banking" },
   { label: "Stack", value: "Java 17 · Spring Boot 3 · Redis" },
-  { label: "Education", value: "BS IT, Bahria University" },
   { label: "Based in", value: "Islamabad, Pakistan" },
 ];
 
@@ -126,21 +198,35 @@ export const experience = [
   },
 ];
 
-/**
- * Technical skills from the CV, extended with the stack used on Aik Tijarat.
- * `size: "lg"` spans two columns from tablet up; with the dense grid this
- * order fills every row at two and three columns.
- */
+/** The technologies shown first, as one prominent row. */
+export const coreStack = [
+  "Java 17",
+  "Spring Boot 3",
+  "PostgreSQL",
+  "SQL Server",
+  "Redis",
+  "Spring Data JPA",
+  "REST APIs",
+  "JWT",
+  "Git",
+  "Maven",
+];
+
+/** Technical skills from the CV, extended with the stack used on Aik Tijarat. */
 export const skills = [
-  { title: "Backend", icon: "server", tint: "blue", size: "lg", items: ["Spring Boot 3", "REST APIs", "Spring Data JPA", "Hibernate", "JDBC", "Maven", "CompletableFuture"] },
-  { title: "Languages", icon: "code", tint: "indigo", items: ["Java 17", "Python", "SQL", "JavaScript", "C++"] },
-  { title: "Security", icon: "lock", tint: "green", size: "lg", items: ["Spring Security", "JWT", "FIDO2 / WebAuthn", "RSA-OAEP", "AES-GCM", "OAuth 2.0", "mTLS", "JWS (ES256)"] },
-  { title: "Data & caching", icon: "database", tint: "orange", items: ["PostgreSQL", "SQL Server", "MySQL", "Redis"] },
-  { title: "Payments & integrations", icon: "card", tint: "sky", items: ["IBFT", "Raast QR", "NFC Tap to Pay", "Webhooks", "Firebase push"] },
-  { title: "Observability & ops", icon: "pulse", tint: "purple", items: ["MDC request tracing", "Integration logs", "DB migrations", "CI/CD", "Hotfix releases"] },
-  { title: "Architecture", icon: "layers", tint: "teal", items: ["Layered Architecture", "MVC", "API Gateway", "Microservices"] },
-  { title: "Tools", icon: "terminal", tint: "graphite", size: "lg", items: ["Git", "GitHub", "Postman", "IntelliJ IDEA", "VS Code"] },
-  { title: "Concepts", icon: "bulb", tint: "pink", items: ["OOP", "DSA", "DBMS", "SOLID", "Agile", "SDLC"] },
+  { title: "Backend", icon: "server", items: ["Spring Boot 3", "REST APIs", "Spring Data JPA", "Hibernate", "JDBC", "Maven", "CompletableFuture"] },
+  { title: "Security", icon: "lock", items: ["Spring Security", "JWT", "FIDO2 / WebAuthn", "RSA-OAEP", "AES-GCM", "OAuth 2.0", "mTLS", "JWS (ES256)"] },
+  { title: "Languages", icon: "code", items: ["Java 17", "Python", "SQL", "JavaScript", "C++"] },
+  { title: "Data & caching", icon: "database", items: ["PostgreSQL", "SQL Server", "MySQL", "Redis"] },
+  {
+    title: "Fintech & payments",
+    icon: "card",
+    items: ["Core banking (iMAL, MicroBank)", "IBFT", "Raast QR", "Request to Pay", "NFC Tap to Pay", "Debit card lifecycle", "NADRA CNIC verification", "Webhooks", "Firebase push"],
+  },
+  { title: "Observability & ops", icon: "pulse", items: ["MDC request tracing", "Integration logs", "DB migrations", "CI/CD", "Hotfix releases"] },
+  { title: "Architecture", icon: "layers", items: ["Layered Architecture", "MVC", "API Gateway", "Microservices"] },
+  { title: "Tools", icon: "terminal", items: ["Git", "GitHub", "Postman", "IntelliJ IDEA", "VS Code"] },
+  { title: "Concepts", icon: "bulb", items: ["OOP", "DSA", "DBMS", "SOLID", "Agile", "SDLC"] },
 ];
 
 export const projects = [
@@ -153,14 +239,46 @@ export const projects = [
     description:
       "Built and supported a production merchant-banking backend serving mobile and portal clients. It integrates with two core banks, card and payment switches, and national ID verification. Highlights are passkey (FIDO2) login, RSA-encrypted credentials, Redis-based session and rate control, a credit-ledger module, and NFC Tap to Pay.",
     tech: ["Java 17", "Spring Boot 3", "PostgreSQL", "SQL Server", "Redis"],
-    /** Engineering notes from the commit history, one sidebar topic each. */
+    /** Case-study summary, written only from the facts in `details` below. */
+    caseStudy: {
+      problem:
+        "Aik Tijarat's backend serves mobile and portal clients and has to work with two core banking systems, card and payment switches and national ID verification — while staying secure enough to pass a VAPT security test.",
+      contribution: [
+        "Passkey (FIDO2) login with an MPIN fallback",
+        "RSA-OAEP encryption of MPIN and OTP",
+        "Redis session, lockout and duplicate-payment controls",
+        "The Aik Khata credit-ledger module (~4,700 lines)",
+        "Onboarding APIs for the NFC Tap to Pay SDK",
+        "Production deployments, hotfixes and migrations",
+      ],
+      decisions: [
+        {
+          title: "Redis for security state",
+          text: "Single active sessions, token blacklisting and login lockouts live in Redis with expiry, so stale state clears itself.",
+        },
+        {
+          title: "Atomic duplicate-payment guard",
+          text: "A SETNX check with a time window blocks double payments.",
+        },
+        {
+          title: "Parallel dashboard loading",
+          text: "CompletableFuture loads dashboard data in parallel instead of one call after another.",
+        },
+        {
+          title: "Traceable by default",
+          text: "An MDC request ID on every log line and an integration log table for all external calls.",
+        },
+      ],
+      outcome:
+        "Running in production for mobile and portal clients, with every reported VAPT finding closed and live issues triaged from UAT and production logs.",
+    },
+    /** Engineering notes from the commit history, one topic each. */
     details: [
       {
         id: "security",
         label: "Security",
         title: "Security and authentication",
         icon: "lock",
-        tint: "green",
         items: [
           {
             title: "FIDO2 / WebAuthn passkeys",
@@ -190,7 +308,6 @@ export const projects = [
         label: "Redis",
         title: "Redis usage",
         icon: "bolt",
-        tint: "red",
         items: [
           { title: "Single active session", text: "One valid token per user." },
           { title: "Token blacklist", text: "Tokens are rejected on logout, and every token is invalidated after a PIN change." },
@@ -206,7 +323,6 @@ export const projects = [
         title: "Aik Khata module",
         meta: "About 4,700 lines",
         icon: "book",
-        tint: "orange",
         items: [
           { title: "Digital credit ledger", text: "Merchants track customers, transactions, line items and payment allocations." },
           { title: "QR collection", text: "QR collection codes with expiry, plus credit limits and status rules." },
@@ -218,7 +334,6 @@ export const projects = [
         label: "Payments",
         title: "Payments and integrations",
         icon: "card",
-        tint: "blue",
         items: [
           { title: "Request to Pay", text: "Aliases, pay now or later, and invoice numbers." },
           {
@@ -237,7 +352,6 @@ export const projects = [
         label: "Tap to Pay",
         title: "NFC Tap to Pay",
         icon: "contactless",
-        tint: "sky",
         items: [
           { title: "SDK onboarding APIs", text: "Onboarding APIs for the NFC Tap to Pay SDK." },
           {
@@ -251,7 +365,6 @@ export const projects = [
         label: "Onboarding",
         title: "Onboarding and accounts",
         icon: "person",
-        tint: "teal",
         items: [
           {
             title: "Two core banking systems",
@@ -267,7 +380,6 @@ export const projects = [
         label: "Notifications",
         title: "Notifications",
         icon: "bell",
-        tint: "pink",
         items: [
           { title: "Firebase push notifications" },
           { title: "Transaction alerts" },
@@ -279,7 +391,6 @@ export const projects = [
         label: "Performance",
         title: "Performance",
         icon: "gauge",
-        tint: "purple",
         items: [
           { title: "Query fixes", text: "Fixed N+1 queries, and added gzip responses." },
           { title: "Parallel dashboard", text: "The dashboard loads its data in parallel using CompletableFuture." },
@@ -292,7 +403,6 @@ export const projects = [
         label: "Production",
         title: "Production support and DevOps",
         icon: "server",
-        tint: "graphite",
         items: [
           { title: "Releases", text: "Production deployments and hotfix releases." },
           { title: "Migrations", text: "Hand-written migration scripts for UAT, pre-production and production." },
@@ -307,7 +417,6 @@ export const projects = [
         label: "Observability",
         title: "Observability",
         icon: "pulse",
-        tint: "indigo",
         items: [
           { title: "Request IDs", text: "A request ID on every log line (MDC)." },
           { title: "Integration log", text: "An integration log table for all external calls." },
@@ -336,17 +445,26 @@ export const projects = [
 
 export const education = [
   {
-    degree: "Bachelor of Science in Information Technology",
+    degree: "BS Information Technology",
     school: "Bahria University, Islamabad",
     location: "Islamabad, Pakistan",
-    notes: ["CGPA: 3.1 / 4.0"],
+    notes: ["CGPA 3.1 / 4.0"],
   },
 ];
 
+/** "Beyond the code" — the human side. */
+export const beyond = {
+  title: "Beyond the code.",
+  intro:
+    "I like understanding how technology works behind the scenes, and I keep challenging myself to get a little better at what I do.",
+  interests: [],
+};
+
 export const navItems = [
   { id: "about", label: "About" },
+  { id: "fintech", label: "Fintech" },
   { id: "experience", label: "Experience" },
+  { id: "projects", label: "Work" },
   { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" },
 ];

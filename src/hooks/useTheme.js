@@ -20,7 +20,7 @@ export default function useTheme() {
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isDark ? "#07080e" : "#f1f3f8");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isDark ? "#1a1714" : "#ffffff");
   }, [isDark]);
 
   useEffect(() => {

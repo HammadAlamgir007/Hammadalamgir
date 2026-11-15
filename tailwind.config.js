@@ -7,8 +7,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        // System font first: SF Pro on Apple devices, Inter everywhere else.
-        sans: ["-apple-system", "BlinkMacSystemFont", "Inter", "Segoe UI", "Roboto", "sans-serif"],
+        // Inter for body copy, Plus Jakarta Sans for headings — the same on every device.
+        sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
+        display: ['"Plus Jakarta Sans"', "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Consolas", "monospace"],
       },
       colors: {
@@ -20,15 +21,20 @@ module.exports = {
         muted: token("muted"),
         line: token("line"),
         accent: token("accent"),
-        "accent-2": token("accent-2"),
-        "accent-3": token("accent-3"),
+        "accent-ink": token("accent-ink"),
+        "on-accent": token("on-accent"),
+        "tone-blue": token("tone-blue"),
+        "tone-green": token("tone-green"),
+        "tone-amber": token("tone-amber"),
+        "tone-red": token("tone-red"),
+        spark: token("spark"),
+        blob: token("blob"),
       },
       maxWidth: {
         page: "72rem",
       },
       transitionTimingFunction: {
         out: "cubic-bezier(0.22, 1, 0.36, 1)",
-        spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
       },
     },
   },

@@ -14,7 +14,7 @@ export default function Navbar() {
   const menuButtonRef = useRef(null);
   const menuRef = useRef(null);
 
-  // Glass state: a sentinel at the top of the page is cheaper than a scroll listener.
+  // Solid bar once the page scrolls: a sentinel at the top is cheaper than a scroll listener.
   useEffect(() => {
     const sentinel = document.getElementById("scroll-sentinel");
     if (!sentinel || !("IntersectionObserver" in window)) return undefined;
@@ -23,11 +23,11 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  // Sliding pill behind the active link.
+  // Orange underline that slides under the active link's text.
   useLayoutEffect(() => {
     const measure = () => {
-      const link = linksRef.current?.querySelector(`[data-id="${active}"]`);
-      setIndicator(link ? { x: link.offsetLeft, y: link.offsetTop, w: link.offsetWidth, h: link.offsetHeight } : null);
+      const label = linksRef.current?.querySelector(`[data-id="${active}"] span`);
+      setIndicator(label ? { x: label.offsetLeft, w: label.offsetWidth } : null);
     };
     measure();
     window.addEventListener("resize", measure);
@@ -53,44 +53,49 @@ export default function Navbar() {
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
+  const solid = scrolled || menuOpen;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
-      <nav
-        aria-label="Primary"
-        className={`mx-auto flex h-16 max-w-page items-center justify-between rounded-full pl-3 pr-2.5 transition-shadow duration-500 ease-out ${
-          scrolled || menuOpen ? "glass-strong depth-lg" : "glass"
-        }`}
-      >
-        <a href="#top" className="flex items-center gap-2.5 rounded-full pr-2 font-semibold tracking-tight" onClick={closeMenu}>
-          <span aria-hidden="true" className="tile tile-blue h-8 w-8 text-[0.6875rem] font-bold tracking-wide">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-300 ${
+        solid ? "bg-bg/90 shadow-[0_1px_0_rgb(var(--line))] backdrop-blur-md" : ""
+      }`}
+    >
+      <nav aria-label="Primary" className="container-page flex h-[4.5rem] items-center justify-between gap-4">
+        <a href="#top" className="flex items-center gap-3 rounded-lg" onClick={closeMenu}>
+          <span
+            aria-hidden="true"
+            className="grid h-9 w-9 place-items-center rounded-xl bg-accent-ink font-display text-xs font-extrabold tracking-wide text-on-accent"
+          >
             {profile.initials}
           </span>
-          <span className="hidden text-[0.9375rem] min-[400px]:inline">{profile.name}</span>
+          <span className="hidden font-display text-[1.0625rem] font-bold tracking-tight text-fg min-[400px]:inline">
+            {profile.name}
+          </span>
         </a>
 
-        <ul ref={linksRef} className="segmented relative hidden items-center rounded-full p-1 md:flex">
-          {indicator && (
-            <li
-              aria-hidden="true"
-              className="lens absolute left-0 top-0 rounded-full transition-[transform,width] duration-500 ease-out"
-              style={{ transform: `translate(${indicator.x}px, ${indicator.y}px)`, width: indicator.w, height: indicator.h }}
-            />
-          )}
+        <ul ref={linksRef} className="relative hidden items-center md:flex">
           {navItems.map((item) => (
             <li key={item.id}>
               <a
                 href={`#${item.id}`}
                 data-id={item.id}
                 aria-current={active === item.id ? "true" : undefined}
-                className={`relative block rounded-full px-4 py-1.5 text-[0.9375rem] font-medium transition-colors duration-300 lg:px-5 ${
+                className={`block px-3.5 py-2 text-[0.9375rem] font-medium transition-colors duration-200 lg:px-4 ${
                   active === item.id ? "text-fg" : "text-fg-2 hover:text-fg"
                 }`}
               >
-                {item.label}
+                <span>{item.label}</span>
               </a>
             </li>
           ))}
+          {indicator && (
+            <li
+              aria-hidden="true"
+              className="pointer-events-none absolute bottom-0 left-0 h-0.5 rounded-full bg-accent transition-[transform,width] duration-500 ease-out"
+              style={{ transform: `translateX(${indicator.x}px)`, width: indicator.w }}
+            />
+          )}
         </ul>
 
         <div className="flex items-center gap-1.5">
@@ -102,23 +107,9 @@ export default function Navbar() {
           >
             <Icon name={isDark ? "sun" : "moon"} className="h-[18px] w-[18px]" />
           </button>
-          <a
-            href={profile.cv}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-plain !min-h-[40px] !px-4 text-sm"
-          >
-            Resume
-            <Icon name="arrowUpRight" className="h-4 w-4" />
-          </a>
-          <a
-            href={profile.cv}
-            download
-            className="btn btn-primary !hidden !min-h-[40px] !w-10 !px-0 sm:!inline-flex"
-            aria-label="Download CV (PDF)"
-            title="Download CV"
-          >
+          <a href={profile.cv} download className="btn btn-primary btn-sm hidden sm:inline-flex">
             <Icon name="download" className="h-4 w-4" />
+            Download CV
           </a>
           <button
             ref={menuButtonRef}
@@ -134,38 +125,35 @@ export default function Navbar() {
         </div>
       </nav>
 
-      <div
-        id="mobile-menu"
-        ref={menuRef}
-        hidden={!menuOpen}
-        className="glass-strong depth-lg mx-auto mt-2 max-w-page rounded-3xl p-3 md:hidden"
-      >
-        <ul className="flex flex-col">
-          {navItems.map((item, i) => (
-            <li key={item.id} className="enter" style={{ "--i": i - 3 }}>
-              <a
-                href={`#${item.id}`}
-                onClick={closeMenu}
-                aria-current={active === item.id ? "true" : undefined}
-                className={`flex min-h-[48px] items-center justify-between rounded-2xl px-4 text-lg font-medium ${
-                  active === item.id ? "bg-fg/[0.06] text-fg" : "text-fg-2"
-                }`}
-              >
-                {item.label}
-                <Icon name="arrowRight" className="h-4 w-4 opacity-40" />
-              </a>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-3 grid grid-cols-2 gap-2">
-          <a href={profile.cv} target="_blank" rel="noopener noreferrer" className="btn btn-plain" onClick={closeMenu}>
-            View resume
-            <Icon name="arrowUpRight" className="h-4 w-4" />
-          </a>
-          <a href={profile.cv} download className="btn btn-primary" onClick={closeMenu}>
-            <Icon name="download" className="h-4 w-4" />
-            Download
-          </a>
+      <div id="mobile-menu" ref={menuRef} hidden={!menuOpen} className="container-page pb-4 md:hidden">
+        <div className="card p-2">
+          <ul className="flex flex-col">
+            {navItems.map((item, i) => (
+              <li key={item.id} className="enter" style={{ "--i": i - 1 }}>
+                <a
+                  href={`#${item.id}`}
+                  onClick={closeMenu}
+                  aria-current={active === item.id ? "true" : undefined}
+                  className={`flex min-h-[48px] items-center justify-between rounded-2xl px-4 font-display text-lg font-semibold ${
+                    active === item.id ? "bg-bg-2 text-fg" : "text-fg-2"
+                  }`}
+                >
+                  {item.label}
+                  <Icon name="arrowRight" className="h-4 w-4 text-accent" />
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-2 grid grid-cols-2 gap-2 p-1">
+            <a href={profile.cv} target="_blank" rel="noopener noreferrer" className="btn btn-outline" onClick={closeMenu}>
+              View CV
+              <Icon name="arrowUpRight" className="h-4 w-4" />
+            </a>
+            <a href={profile.cv} download className="btn btn-primary" onClick={closeMenu}>
+              <Icon name="download" className="h-4 w-4" />
+              Download
+            </a>
+          </div>
         </div>
       </div>
     </header>
