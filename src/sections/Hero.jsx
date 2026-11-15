@@ -11,7 +11,7 @@ function Words({ text, offset = 0, trailingSpace = false, className }) {
       <span className={className} style={{ "--i": offset + i }}>
         {word}
       </span>
-      {(trailingSpace || i < words.length - 1) && " "}
+      {(trailingSpace || i < words.length - 1) && " "}
     </span>
   ));
 }
@@ -39,6 +39,37 @@ function useParallax() {
   return ref;
 }
 
+/** macOS-style Dock: profiles on the left, the CV past the divider. */
+function Dock() {
+  const items = [
+    ...socials.map((s) => ({ ...s, external: s.href.startsWith("http") })),
+    { label: "Download CV", ariaLabel: "Download CV (PDF)", href: profile.cv, icon: "file", tint: "paper", download: true },
+  ];
+
+  return (
+    <ul className="glass dock" aria-label="Profiles and CV">
+      {items.map((item) => (
+        <li key={item.label} className={item.download ? "dock-split" : undefined}>
+          <a
+            href={item.href}
+            className="dock-item"
+            aria-label={item.ariaLabel ?? item.label}
+            {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}
+            {...(item.download && { download: true })}
+          >
+            <span className={`tile tile-${item.tint} dock-tile`} aria-hidden="true">
+              <Icon name={item.icon} className="h-[22px] w-[22px]" />
+            </span>
+            <span className="dock-label" aria-hidden="true">
+              {item.label}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function Hero() {
   const ref = useParallax();
   const [first, ...rest] = profile.name.split(" ");
@@ -52,23 +83,18 @@ export default function Hero() {
     >
       <div id="scroll-sentinel" className="absolute left-0 top-0 h-4 w-px" aria-hidden="true" />
 
-      {/* Background: drifting mist clouds + faint grid, fading into the page */}
+      {/* Background: drifting light clouds over the page wallpaper */}
       <div aria-hidden="true" className="mist pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="mist-cloud left-[-18%] top-[-30%] h-[60rem] w-[60rem]" style={{ "--c": "var(--mist-1)" }} />
         <div className="mist-cloud right-[-22%] top-[-10%] h-[52rem] w-[52rem]" style={{ "--c": "var(--mist-2)", animationDelay: "-9s" }} />
         <div className="mist-cloud bottom-[-35%] left-[20%] h-[50rem] w-[70rem]" style={{ "--c": "var(--mist-3)", animationDelay: "-16s" }} />
         <div className="mist-glow" />
-        <div className="mist-grid absolute inset-0" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-bg" />
       </div>
 
       <div className="container-page relative text-center">
         {profile.photo && (
           <div className="enter mx-auto mb-7 w-fit" style={{ "--i": -3 }}>
-            <div
-              className="float rounded-full p-[3px] shadow-[var(--shadow-lg)]"
-              style={{ background: "var(--gradient)" }}
-            >
+            <div className="float glass depth-lg rounded-full p-1.5">
               <img
                 src={profile.photo.src}
                 srcSet={profile.photo.srcSet}
@@ -78,7 +104,7 @@ export default function Hero() {
                 height={112}
                 fetchpriority="high"
                 decoding="async"
-                className="h-24 w-24 rounded-full border-[3px] border-bg bg-bg-2 object-cover sm:h-28 sm:w-28"
+                className="h-24 w-24 rounded-full bg-bg-2 object-cover sm:h-28 sm:w-28"
               />
             </div>
           </div>
@@ -116,33 +142,18 @@ export default function Hero() {
             View resume
             <Icon name="arrowUpRight" className="h-4 w-4" />
           </Button>
-          <Button href={profile.cv} download variant="glass" className="w-full sm:w-auto">
-            <Icon name="download" className="h-4 w-4" />
-            Download CV
-          </Button>
         </div>
 
-        <ul className="enter mt-6 flex items-center justify-center gap-1" style={{ "--i": 4 }}>
-          {socials.map((s) => (
-            <li key={s.label}>
-              <a
-                href={s.href}
-                className="icon-btn"
-                aria-label={s.label}
-                {...(s.href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
-              >
-                <Icon name={s.icon} className="h-[18px] w-[18px]" />
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="enter mt-9 flex justify-center" style={{ "--i": 4 }}>
+          <Dock />
+        </div>
 
-        {/* CV metrics — float gently and drift with the pointer */}
+        {/* Highlights — widgets that float gently and drift with the pointer */}
         <dl className="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
           {highlights.map((h, i) => (
             <div key={h.label} className="enter" style={{ "--i": 5 + i }}>
               <div
-                className="float glass flex flex-col rounded-2xl px-4 py-5 text-left shadow-[var(--shadow-sm)] transition-transform duration-700 ease-out md:px-5"
+                className="float glass flex h-full flex-col rounded-[1.375rem] px-4 py-5 text-left transition-transform duration-700 ease-out md:px-5"
                 style={{
                   "--i": i,
                   transform: `translate3d(calc(var(--px, 0) * ${(i % 2 ? -1 : 1) * (10 + i * 4)}px), calc(var(--py, 0) * ${8 + i * 3}px), 0)`,

@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#fafafc" />
+    <meta name="theme-color" content="#f1f3f8" />
     <meta name="color-scheme" content="light dark" />
 
     <title>Hammad Alamgir — Java Backend Developer</title>
     <meta
       name="description"
-      content="Muhammad Hammad Alamgir is a Java Backend Developer building enterprise applications with Java, Spring Boot, REST APIs, JPA/Hibernate and SQL — including secure APIs, encryption and API Gateway integrations for financial applications."
+      content="Muhammad Hammad Alamgir is a Java Backend Developer building a production merchant-banking backend with Java 17, Spring Boot 3, PostgreSQL, SQL Server and Redis — passkey (FIDO2) login, RSA-encrypted credentials and payment integrations."
     />
     <meta name="author" content="Muhammad Hammad Alamgir" />
     <meta name="robots" content="index, follow" />
@@ -20,7 +20,7 @@
     <meta property="og:title" content="Hammad Alamgir — Java Backend Developer" />
     <meta
       property="og:description"
-      content="Java Backend Developer at Warmbytes — Spring Boot, REST APIs, JPA/Hibernate, SQL, Spring Security and API Gateway for enterprise financial applications."
+      content="Java Backend Developer at Warmbytes — Spring Boot 3, Redis, FIDO2 passkeys, RSA encryption and payment integrations for the Aik Tijarat merchant-banking app."
     />
     <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -33,7 +33,7 @@
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Hammad Alamgir — Java Backend Developer" />
-    <meta name="twitter:description" content="Java, Spring Boot, REST APIs and SQL for enterprise financial applications." />
+    <meta name="twitter:description" content="Java 17, Spring Boot 3, Redis and secure payment integrations for a production merchant-banking app." />
     <meta name="twitter:image" content="%PUBLIC_URL%/og-image.png" />
 
     <!-- Icons -->
@@ -42,7 +42,7 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <!-- One variable font file (Inter 400–700) -->
+    <!-- Apple devices use SF Pro (system font); everyone else gets one Inter variable file -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet" />
@@ -57,7 +57,7 @@
         var dark = theme ? theme === "dark" : window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
         if (dark) {
           root.classList.add("dark");
-          document.querySelector('meta[name="theme-color"]').setAttribute("content", "#08080a");
+          document.querySelector('meta[name="theme-color"]').setAttribute("content", "#07080e");
         }
       })();
     </script>
@@ -68,7 +68,7 @@
         "@type": "Person",
         "name": "Muhammad Hammad Alamgir",
         "jobTitle": "Java Backend Developer",
-        "description": "Java Backend Developer experienced in developing and maintaining enterprise applications using Java, Spring Boot, REST APIs, JPA/Hibernate, and SQL.",
+        "description": "Java Backend Developer building and supporting a production merchant-banking backend with Java 17, Spring Boot 3, PostgreSQL, SQL Server and Redis.",
         "email": "mailto:hammadalamgir778@gmail.com",
         "worksFor": { "@type": "Organization", "name": "Warmbytes" },
         "address": { "@type": "PostalAddress", "addressLocality": "Islamabad", "addressCountry": "PK" },
@@ -76,7 +76,8 @@
         "sameAs": ["https://github.com/ihammadalamgir", "https://www.linkedin.com/in/ihammadalamgir"],
         "knowsAbout": [
           "Java", "Spring Boot", "REST APIs", "Spring Data JPA", "Hibernate", "JDBC", "Spring Security", "JWT",
-          "RSA", "AES-GCM", "MySQL", "PostgreSQL", "SQL Server", "API Gateway", "Microservices"
+          "FIDO2", "WebAuthn", "RSA", "AES-GCM", "OAuth 2.0", "mTLS", "Redis", "MySQL", "PostgreSQL",
+          "SQL Server", "API Gateway", "Microservices"
         ]
       }
     </script>

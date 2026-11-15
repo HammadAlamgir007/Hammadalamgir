@@ -1,8 +1,8 @@
 export default function SectionHeader({ id, eyebrow, title, intro, className = "" }) {
   return (
     <header className={`mb-14 max-w-3xl md:mb-20 ${className}`}>
-      <p data-reveal className="t-label mb-5 flex items-center gap-3 text-accent">
-        <span className="h-px w-8 bg-accent/60" aria-hidden="true" />
+      <p data-reveal className="glass eyebrow mb-6">
+        <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
         {eyebrow}
       </p>
       <h2 id={id} data-reveal style={{ "--i": 1 }} className="t-h2">

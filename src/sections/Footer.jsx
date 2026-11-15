@@ -3,8 +3,8 @@ import { profile, socials } from "../data/portfolio";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line/70">
-      <div className="container-page flex flex-col items-center justify-between gap-4 py-8 text-sm text-muted sm:flex-row">
+    <footer className="container-page pb-6">
+      <div className="glass flex flex-col items-center justify-between gap-3 rounded-3xl px-5 py-4 text-sm text-muted sm:flex-row sm:rounded-full sm:py-2 sm:pl-6 sm:pr-2">
         <p>
           © {new Date().getFullYear()} {profile.fullName ?? profile.name} · {profile.shortRole}
         </p>

@@ -7,7 +7,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+        // System font first: SF Pro on Apple devices, Inter everywhere else.
+        sans: ["-apple-system", "BlinkMacSystemFont", "Inter", "Segoe UI", "Roboto", "sans-serif"],
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Consolas", "monospace"],
       },
       colors: {
@@ -20,6 +21,7 @@ module.exports = {
         line: token("line"),
         accent: token("accent"),
         "accent-2": token("accent-2"),
+        "accent-3": token("accent-3"),
       },
       maxWidth: {
         page: "72rem",

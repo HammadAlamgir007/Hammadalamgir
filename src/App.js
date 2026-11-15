@@ -6,7 +6,6 @@ import Education from "./sections/Education";
 import Experience from "./sections/Experience";
 import Footer from "./sections/Footer";
 import Hero from "./sections/Hero";
-import Impact from "./sections/Impact";
 import Projects from "./sections/Projects";
 import Skills from "./sections/Skills";
 
@@ -21,6 +20,7 @@ export default function App() {
       >
         Skip to content
       </a>
+      <div className="wallpaper" aria-hidden="true" />
       <Navbar />
       <main id="main">
         <Hero />
@@ -28,7 +28,6 @@ export default function App() {
         <Experience />
         <Skills />
         <Projects />
-        <Impact />
         <Education />
         <Contact />
       </main>

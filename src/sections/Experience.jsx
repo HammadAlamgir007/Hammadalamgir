@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import Emphasize from "../components/Emphasize";
 import Icon from "../components/Icon";
 import SectionHeader from "../components/SectionHeader";
 import { experience, sections } from "../data/portfolio";
@@ -60,7 +59,7 @@ function Role({ job, index }) {
       <span
         aria-hidden="true"
         className={`absolute left-[3px] top-2 h-[11px] w-[11px] rounded-full border-2 md:left-[calc(11rem+1.25rem-5px)] ${
-          isCurrent ? "border-accent bg-accent" : "border-line bg-bg"
+          isCurrent ? "border-accent bg-accent shadow-[0_0_0_4px_rgb(var(--accent)/0.18)]" : "border-fg/20 bg-bg"
         }`}
       />
 
@@ -81,7 +80,7 @@ function Role({ job, index }) {
         )}
       </div>
 
-      <article data-reveal className="card p-6 transition-[border-color,box-shadow] duration-300 hover:border-accent/30 hover:shadow-[var(--shadow-lg)] sm:p-8 md:ml-10">
+      <article data-reveal className="card card-hover p-6 sm:p-8 md:ml-10">
         <header>
           <h3 className="t-h3">{job.role}</h3>
           <p className="mt-1.5 text-[0.9375rem] font-medium text-fg-2">
@@ -95,7 +94,7 @@ function Role({ job, index }) {
           {points.map((point) => (
             <li key={point} className="relative pl-5">
               <span aria-hidden="true" className="absolute left-0 top-[0.7em] h-1 w-1 rounded-full bg-accent/70" />
-              <Emphasize>{point}</Emphasize>
+              {point}
             </li>
           ))}
         </ul>
@@ -129,7 +128,7 @@ export default function Experience() {
   const { listRef, fillRef } = useTimelineProgress();
 
   return (
-    <section id="experience" aria-labelledby="experience-title" className="section bg-bg-2/60">
+    <section id="experience" aria-labelledby="experience-title" className="section">
       <div className="container-page">
         <SectionHeader
           id="experience-title"
@@ -140,8 +139,8 @@ export default function Experience() {
 
         <div className="relative">
           {/* Rail + scroll-driven fill */}
-          <div aria-hidden="true" className="absolute bottom-2 left-2 top-2 w-px bg-line md:left-[calc(11rem+1.25rem)]">
-            <div ref={fillRef} className="h-full w-full origin-top scale-y-0 bg-gradient-to-b from-accent to-accent-2" />
+          <div aria-hidden="true" className="absolute bottom-2 left-2 top-2 w-px bg-fg/10 md:left-[calc(11rem+1.25rem)]">
+            <div ref={fillRef} className="h-full w-full origin-top scale-y-0 bg-gradient-to-b from-accent to-accent-3" />
           </div>
 
           <ol ref={listRef} className="space-y-10 md:space-y-14">

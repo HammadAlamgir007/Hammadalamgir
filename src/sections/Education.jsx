@@ -1,16 +1,16 @@
 import Icon from "../components/Icon";
 import SectionHeader from "../components/SectionHeader";
-import { education } from "../data/portfolio";
+import { education, sections } from "../data/portfolio";
 
 export default function Education() {
   return (
     <section id="education" aria-labelledby="education-title" className="section !pt-0">
       <div className="container-page">
-        <SectionHeader id="education-title" eyebrow="Education" title="Computer Science foundations." />
+        <SectionHeader id="education-title" eyebrow="Education" title={sections.education.title} />
 
         {education.map((item) => (
           <article key={item.degree} data-reveal className="card flex flex-col gap-6 p-7 sm:flex-row sm:items-start sm:p-10">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-accent/10 text-accent" aria-hidden="true">
+            <span className="tile tile-indigo h-12 w-12" aria-hidden="true">
               <Icon name="graduation" className="h-6 w-6" />
             </span>
             <div className="flex-1">

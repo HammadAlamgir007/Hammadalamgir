@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Icon from "../components/Icon";
+import Window from "../components/Window";
 import { useMagnetic } from "../hooks/usePointerEffects";
 import { profile, sections, socials } from "../data/portfolio";
 
@@ -33,6 +34,7 @@ function CopyEmail() {
   );
 }
 
+/** Mail-style compose window. */
 function ContactForm() {
   const [form, setForm] = useState(EMPTY);
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
@@ -71,71 +73,77 @@ function ContactForm() {
   );
 
   return (
-    <form onSubmit={submit} data-reveal style={{ "--i": 1 }} className="glass-strong space-y-5 rounded-3xl p-6 shadow-[var(--shadow-lg)] sm:p-8">
-      <div className="grid gap-5 sm:grid-cols-2">
-        {field("name", "Name", { autoComplete: "name", required: true })}
-        {field("email", "Email", { type: "email", autoComplete: "email", required: true })}
-      </div>
-      {field("subject", "Subject", { placeholder: "Role, project or collaboration" })}
-      <div>
-        <div className="mb-2 flex items-baseline justify-between">
-          <label htmlFor="contact-message" className="text-sm font-medium text-fg-2">
-            Message
-          </label>
-          <span className="t-meta text-muted" aria-hidden="true">
-            {form.message.length}/{MAX_MESSAGE}
-          </span>
+    <Window as="form" title="New Message" onSubmit={submit} data-reveal style={{ "--i": 1 }} className="card self-start">
+      <p className="flex items-center gap-2 border-b border-fg/[0.07] px-6 py-3 text-sm sm:px-8">
+        <span className="text-muted">To:</span>
+        <span className="rounded-full bg-accent/10 px-2.5 py-0.5 font-medium text-accent">{profile.name}</span>
+      </p>
+
+      <div className="space-y-5 p-6 sm:p-8">
+        <div className="grid gap-5 sm:grid-cols-2">
+          {field("name", "Name", { autoComplete: "name", required: true })}
+          {field("email", "Email", { type: "email", autoComplete: "email", required: true })}
         </div>
-        <textarea
-          id="contact-message"
-          name="message"
-          rows={5}
-          maxLength={MAX_MESSAGE}
-          required
-          value={form.message}
-          onChange={update}
-          className="field resize-y"
-        />
-      </div>
+        {field("subject", "Subject", { placeholder: "Role, project or collaboration" })}
+        <div>
+          <div className="mb-2 flex items-baseline justify-between">
+            <label htmlFor="contact-message" className="text-sm font-medium text-fg-2">
+              Message
+            </label>
+            <span className="t-meta text-muted" aria-hidden="true">
+              {form.message.length}/{MAX_MESSAGE}
+            </span>
+          </div>
+          <textarea
+            id="contact-message"
+            name="message"
+            rows={5}
+            maxLength={MAX_MESSAGE}
+            required
+            value={form.message}
+            onChange={update}
+            className="field resize-y"
+          />
+        </div>
 
-      <button ref={submitRef} type="submit" disabled={status === "sending"} className="btn btn-primary w-full disabled:opacity-60">
-        {status === "sending" ? "Sending…" : "Send message"}
-        <Icon name="send" className="h-4 w-4" />
-      </button>
+        <button ref={submitRef} type="submit" disabled={status === "sending"} className="btn btn-primary w-full disabled:opacity-60">
+          {status === "sending" ? "Sending…" : "Send message"}
+          <Icon name="send" className="h-4 w-4" />
+        </button>
 
-      <div aria-live="polite" className="text-center text-sm">
-        {status === "sent" && <p className="font-medium text-accent-2">Thanks — your message was sent.</p>}
-        {status === "error" && (
-          <p className="text-fg-2">
-            The form couldn't be delivered right now.{" "}
-            <a href={mailtoFor(form)} className="font-semibold text-accent underline underline-offset-4">
-              Send it from your email app instead
-            </a>
-            .
-          </p>
-        )}
+        <div aria-live="polite" className="text-center text-sm">
+          {status === "sent" && <p className="font-medium text-accent-2">Thanks — your message was sent.</p>}
+          {status === "error" && (
+            <p className="text-fg-2">
+              The form couldn't be delivered right now.{" "}
+              <a href={mailtoFor(form)} className="font-semibold text-accent underline underline-offset-4">
+                Send it from your email app instead
+              </a>
+              .
+            </p>
+          )}
+        </div>
       </div>
-    </form>
+    </Window>
   );
 }
 
 export default function Contact() {
   const rows = [
-    { icon: "mail", label: "Email", value: profile.email, href: `mailto:${profile.email}`, extra: <CopyEmail /> },
+    { icon: "mail", tint: "sky", label: "Email", value: profile.email, href: `mailto:${profile.email}`, extra: <CopyEmail /> },
     ...socials
       .filter((s) => s.href.startsWith("http"))
-      .map((s) => ({ icon: s.icon, label: s.label, value: s.handle, href: s.href, external: true })),
-    { icon: "phone", label: "Phone", value: profile.phone, href: profile.phoneHref },
-    { icon: "pin", label: "Location", value: [profile.location, profile.relocation].filter(Boolean).join(" · ") },
+      .map((s) => ({ icon: s.icon, tint: s.tint, label: s.label, value: s.handle, href: s.href, external: true })),
+    { icon: "phone", tint: "green", label: "Phone", value: profile.phone, href: profile.phoneHref },
+    { icon: "pin", tint: "red", label: "Location", value: [profile.location, profile.relocation].filter(Boolean).join(" · ") },
   ];
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="section relative overflow-hidden bg-bg-2/60">
-      <div aria-hidden="true" className="ambient -right-40 top-10 h-[30rem] w-[30rem] bg-accent/15" />
-      <div className="container-page relative grid gap-12 lg:grid-cols-2 lg:gap-16">
+    <section id="contact" aria-labelledby="contact-title" className="section">
+      <div className="container-page grid gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
-          <p data-reveal className="t-label mb-5 flex items-center gap-3 text-accent">
-            <span className="h-px w-8 bg-accent/60" aria-hidden="true" />
+          <p data-reveal className="glass eyebrow mb-6">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
             Contact
           </p>
           <h2 id="contact-title" data-reveal style={{ "--i": 1 }} className="t-h1">
@@ -145,32 +153,37 @@ export default function Contact() {
             {sections.contact.intro}
           </p>
 
-          <ul data-reveal style={{ "--i": 3 }} className="mt-10 divide-y divide-line/70 border-y border-line/70">
+          {/* System Settings–style grouped list */}
+          <ul
+            data-reveal
+            style={{ "--i": 3, "--sep-inset": "4.25rem", "--sep-end": "0.75rem" }}
+            className="card settings-group mt-10 !rounded-[1.375rem] p-1.5"
+          >
             {rows.map((row) => {
               const content = (
                 <>
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-surface text-fg-2 shadow-[var(--shadow-sm)] transition-colors group-hover:text-accent" aria-hidden="true">
+                  <span className={`tile tile-${row.tint} h-9 w-9`} aria-hidden="true">
                     <Icon name={row.icon} className="h-[18px] w-[18px]" />
                   </span>
                   <span className="min-w-0">
-                    <span className="t-label block text-[0.6875rem] text-muted">{row.label}</span>
-                    <span className="mt-1 block truncate font-medium text-fg">{row.value}</span>
+                    <span className="block text-xs font-medium text-muted">{row.label}</span>
+                    <span className="block truncate font-medium text-fg">{row.value}</span>
                   </span>
                 </>
               );
               return (
-                <li key={row.label} className="flex items-center gap-2 py-4">
+                <li key={row.label} className="flex items-center gap-1 pr-1">
                   {row.href ? (
                     <a
                       href={row.href}
-                      className="group flex min-w-0 flex-1 items-center gap-4 rounded-xl"
+                      className="group flex min-w-0 flex-1 items-center gap-3.5 rounded-2xl px-3 py-3 transition-colors hover:bg-fg/[0.04]"
                       {...(row.external && { target: "_blank", rel: "noopener noreferrer" })}
                     >
                       {content}
                       {row.external && <Icon name="arrowUpRight" className="ml-auto h-4 w-4 shrink-0 text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />}
                     </a>
                   ) : (
-                    <div className="flex min-w-0 flex-1 items-center gap-4">{content}</div>
+                    <div className="flex min-w-0 flex-1 items-center gap-3.5 px-3 py-3">{content}</div>
                   )}
                   {row.extra}
                 </li>

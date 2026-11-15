@@ -58,25 +58,22 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
       <nav
         aria-label="Primary"
-        className={`mx-auto flex h-16 max-w-page items-center justify-between rounded-full pl-3 pr-2.5 transition-[background-color,border-color,box-shadow] duration-500 ease-out ${
-          scrolled || menuOpen ? "glass-strong shadow-[var(--shadow-lg)]" : "glass shadow-[var(--shadow-sm)]"
+        className={`mx-auto flex h-16 max-w-page items-center justify-between rounded-full pl-3 pr-2.5 transition-shadow duration-500 ease-out ${
+          scrolled || menuOpen ? "glass-strong depth-lg" : "glass"
         }`}
       >
         <a href="#top" className="flex items-center gap-2.5 rounded-full pr-2 font-semibold tracking-tight" onClick={closeMenu}>
-          <span
-            aria-hidden="true"
-            className="grid h-8 w-8 place-items-center rounded-full bg-fg text-[0.6875rem] font-bold tracking-wide text-bg"
-          >
+          <span aria-hidden="true" className="tile tile-blue h-8 w-8 text-[0.6875rem] font-bold tracking-wide">
             {profile.initials}
           </span>
           <span className="hidden text-[0.9375rem] min-[400px]:inline">{profile.name}</span>
         </a>
 
-        <ul ref={linksRef} className="relative hidden items-center rounded-full bg-fg/[0.04] p-1 md:flex">
+        <ul ref={linksRef} className="segmented relative hidden items-center rounded-full p-1 md:flex">
           {indicator && (
             <li
               aria-hidden="true"
-              className="absolute left-0 top-0 rounded-full bg-surface shadow-[var(--shadow-sm)] ring-1 ring-line/70 transition-[transform,width] duration-500 ease-out"
+              className="lens absolute left-0 top-0 rounded-full transition-[transform,width] duration-500 ease-out"
               style={{ transform: `translate(${indicator.x}px, ${indicator.y}px)`, width: indicator.w, height: indicator.h }}
             />
           )}
@@ -109,7 +106,7 @@ export default function Navbar() {
             href={profile.cv}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-glass !min-h-[40px] !px-4 text-sm"
+            className="btn btn-plain !min-h-[40px] !px-4 text-sm"
           >
             Resume
             <Icon name="arrowUpRight" className="h-4 w-4" />
@@ -141,7 +138,7 @@ export default function Navbar() {
         id="mobile-menu"
         ref={menuRef}
         hidden={!menuOpen}
-        className="glass-strong mx-auto mt-2 max-w-page rounded-3xl p-3 shadow-[var(--shadow-lg)] md:hidden"
+        className="glass-strong depth-lg mx-auto mt-2 max-w-page rounded-3xl p-3 md:hidden"
       >
         <ul className="flex flex-col">
           {navItems.map((item, i) => (
@@ -161,7 +158,7 @@ export default function Navbar() {
           ))}
         </ul>
         <div className="mt-3 grid grid-cols-2 gap-2">
-          <a href={profile.cv} target="_blank" rel="noopener noreferrer" className="btn btn-glass" onClick={closeMenu}>
+          <a href={profile.cv} target="_blank" rel="noopener noreferrer" className="btn btn-plain" onClick={closeMenu}>
             View resume
             <Icon name="arrowUpRight" className="h-4 w-4" />
           </a>
