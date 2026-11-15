@@ -41,7 +41,7 @@ npm run build      # production build
 - **Site address.** The canonical URL in `public/index.html` is the single source of truth; the prerender reads it to write `build/sitemap.xml`. If the domain changes (for example to an is-a.dev subdomain), update every `https://hammadalamgir-wec3.vercel.app` in `public/index.html` and `public/robots.txt`.
 - **Structured data.** `public/index.html` holds JSON-LD for a `ProfilePage` about a `Person`; `dateModified` is stamped at build time.
 - **Share previews.** `og:image` / `twitter:image` use absolute URLs to `public/og-image.png` (1200×630).
-- **404s.** Unknown URLs return a real 404 (`public/404.html`) instead of the home page.
+- **404s.** `public/404.html` is the not-found page, but Vercel's "Create React App" framework preset still answers unknown URLs with the home page (status 200). The canonical link points those back to the home page, so search engines don't index duplicates. For real 404s, set the Vercel project's Framework Preset to "Other" (build command `npm run build`, output directory `build`).
 
 ## Deployment
 
