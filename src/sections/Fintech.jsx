@@ -1,7 +1,34 @@
 import { Dot, Sparkle } from "../components/Decor";
 import Icon from "../components/Icon";
 import SectionHeader from "../components/SectionHeader";
-import { fintech } from "../data/portfolio";
+import { fintech, highlights } from "../data/portfolio";
+
+/** Dividers for the 2-column (mobile) and 4-column (desktop) proof strip. */
+const STAT_CELL =
+  "flex flex-col border-line p-5 sm:p-6 [&:nth-child(even)]:border-l [&:nth-child(n+3)]:border-t lg:[&:nth-child(n+3)]:border-t-0 lg:[&:not(:first-child)]:border-l";
+
+/** Each stat number gets its own mini colour (all pass AA as large text). */
+const STAT_TONE = {
+  blue: "text-tone-blue",
+  orange: "text-accent-ink",
+  green: "text-tone-green",
+  amber: "text-tone-amber",
+};
+
+function ProofStrip() {
+  return (
+    <dl data-reveal className="card mb-6 grid grid-cols-2 overflow-hidden lg:grid-cols-4">
+      {highlights.map((h) => (
+        <div key={h.label} className={STAT_CELL}>
+          <dt className="order-2 mt-1 text-sm leading-snug text-muted">{h.label}</dt>
+          <dd className={`order-1 font-display text-2xl font-extrabold tracking-tight sm:text-3xl ${STAT_TONE[h.tone] ?? "text-fg"}`}>
+            {h.value}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
 
 /** Mini-colour icon tiles (decorative; the text next to them carries the meaning). */
 const TILE = {
@@ -64,6 +91,7 @@ export default function Fintech() {
           intro={fintech.intro}
         />
 
+        <ProofStrip />
         <PaymentFlow />
 
         <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

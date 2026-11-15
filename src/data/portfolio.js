@@ -5,6 +5,11 @@
  * When either changes, update this file only.
  */
 
+import aikHome from "../assets/aik-tijarat/home.webp";
+import aikIcon from "../assets/aik-tijarat/icon.webp";
+import aikPayBills from "../assets/aik-tijarat/pay-bills.webp";
+import aikQr from "../assets/aik-tijarat/qr.webp";
+import aikSendMoney from "../assets/aik-tijarat/send-money.webp";
 import photo192 from "../assets/profile-192.webp";
 import photo384 from "../assets/profile-384.webp";
 
@@ -25,9 +30,7 @@ export const profile = {
     alt: "Portrait of Hammad Alamgir",
   },
   specialty: "Fintech & Payments",
-  status: "Currently building Aik Tijarat, a merchant-banking backend, at Warmbytes.",
-  headline:
-    "I'm Hammad, a Java Backend Developer specialising in fintech and payments. At Warmbytes I build secure, reliable backends for a production merchant-banking app with Java 17, Spring Boot 3, PostgreSQL and Redis.",
+  headline: "I build secure, reliable backends for banking and payments — currently at Warmbytes.",
   /** About — the professional story, first paragraph is the lead. */
   story: [
     "I'm a Bahria University IT graduate who moved into backend development through two internships — first as a software developer at Lexon IT, then as a Java backend intern at Warmbytes — and now work there as a Java Backend Developer.",
@@ -61,7 +64,7 @@ export const sections = {
   },
   projects: {
     title: "Financial, healthcare and academic backends.",
-    intro: "A production merchant-banking backend in depth — the problem, my part, the decisions and the result — followed by a diagnostics platform and a hands-on Spring Boot system.",
+    intro: "A live merchant-banking app in depth — the screens, the problem, my part, the decisions and the result — followed by a diagnostics platform and a hands-on Spring Boot system.",
   },
   skills: {
     title: "Technologies I work with.",
@@ -74,12 +77,12 @@ export const sections = {
   },
 };
 
-/** Hero proof strip — from the CV and the Aik Tijarat commit history. `tone` colours the number. */
+/** Proof strip in the Fintech section — from the CV and the Aik Tijarat commit history. `tone` colours the number. */
 export const highlights = [
-  { value: "FIDO2", label: "Passkey login with MPIN fallback", tone: "blue" },
-  { value: "Redis", label: "Sessions, lockouts & duplicate-payment guard", tone: "orange" },
-  { value: "2", label: "Core banks integrated: iMAL & MicroBank", tone: "green" },
-  { value: "~4,700", label: "Lines in the Aik Khata ledger module", tone: "amber" },
+  { value: "Live", label: "Banking app on Google Play", tone: "green" },
+  { value: "2", label: "Core banks connected", tone: "blue" },
+  { value: "Passkeys", label: "Modern, secure login", tone: "orange" },
+  { value: "QR & NFC", label: "Payments, transfers & Tap to Pay", tone: "amber" },
 ];
 
 /**
@@ -91,15 +94,15 @@ export const fintech = {
   titleAccent: "banking and payment systems.",
   intro:
     "Most of my work sits inside a production merchant-banking backend — where money moves, identities are verified and every request has to be secure and traceable.",
-  flowTitle: "How a payment request moves through the backend",
+  flowTitle: "How a payment works",
   flowNote: "Simplified",
   flow: [
-    { title: "Secure request", text: "The app encrypts the MPIN with RSA-OAEP before it leaves the device.", icon: "lock", tone: "blue" },
-    { title: "Verified session", text: "A hardened JWT filter and a Redis single-session check reject stale or blacklisted tokens.", icon: "person", tone: "orange" },
-    { title: "Duplicate guard", text: "An atomic Redis SETNX check with a time window blocks double payments.", icon: "bolt", tone: "amber" },
-    { title: "Payment rail", text: "IBFT through Euronet, Raast QR or a wallet transfer.", icon: "card", tone: "green" },
-    { title: "Core banking", text: "Integrated with two core banking systems: iMAL and MicroBank.", icon: "server", tone: "blue" },
-    { title: "Notify & trace", text: "Transaction alerts and push go out; external calls land in the integration log with a request ID.", icon: "bell", tone: "red" },
+    { title: "Encrypted PIN", text: "The app encrypts the PIN (RSA) before it leaves the phone.", icon: "lock", tone: "blue" },
+    { title: "Login check", text: "One valid session per user; old or logged-out tokens are rejected.", icon: "person", tone: "orange" },
+    { title: "No double payments", text: "A Redis lock stops the same payment from going through twice.", icon: "bolt", tone: "amber" },
+    { title: "Money sent", text: "By interbank transfer (IBFT), Raast QR or wallet transfer.", icon: "card", tone: "green" },
+    { title: "Bank systems", text: "Connected to two core banking systems: iMAL and MicroBank.", icon: "server", tone: "blue" },
+    { title: "Alerts & logs", text: "The customer gets an alert, and every external call is logged with a request ID.", icon: "bell", tone: "red" },
   ],
   areas: [
     {
@@ -117,7 +120,7 @@ export const fintech = {
       tags: ["FIDO2", "RSA-OAEP", "JWT", "VAPT"],
     },
     {
-      title: "Core banking integration",
+      title: "Bank connections",
       icon: "server",
       tone: "orange",
       text: "Onboarding for new and existing customers across iMAL and MicroBank, merchant upgrades with portal approval, and account-lifecycle APIs.",
@@ -131,14 +134,14 @@ export const fintech = {
       tags: ["Debit cards", "NFC", "mTLS", "JWS"],
     },
     {
-      title: "Merchant credit ledger",
+      title: "Digital credit book",
       icon: "book",
       tone: "red",
       text: "Aik Khata: customers, transactions, payment allocations, QR collection codes with expiry, credit limits and an overdue-account scheduler.",
       tags: ["Aik Khata", "QR collection", "Scheduler"],
     },
     {
-      title: "Identity & compliance",
+      title: "ID checks & data safety",
       icon: "person",
       tone: "blue",
       text: "NADRA CNIC verification, CNIC-expiry checks and reminders, masking of card numbers, mobile numbers and IBANs in logs, and account certificates.",
@@ -239,6 +242,20 @@ export const projects = [
     description:
       "Built and supported a production merchant-banking backend serving mobile and portal clients. It integrates with two core banks, card and payment switches, and national ID verification. Highlights are passkey (FIDO2) login, RSA-encrypted credentials, Redis-based session and rate control, a credit-ledger module, and NFC Tap to Pay.",
     tech: ["Java 17", "Spring Boot 3", "PostgreSQL", "SQL Server", "Redis"],
+    /** The live app. Screens are from its public Google Play listing. */
+    app: {
+      name: "aik Tijarat",
+      tagline: "Sharia-compliant QR payments, money transfers and bill payments for businesses.",
+      store: "Google Play",
+      url: "https://play.google.com/store/apps/details?id=com.warmbytes.bipl.aik.kuikpay",
+      icon: aikIcon,
+      screens: [
+        { src: aikHome, width: 480, height: 1041, caption: "Home", alt: "aik Tijarat home screen with balance, quick actions and recent transactions" },
+        { src: aikQr, width: 480, height: 1061, caption: "QR payments", alt: "aik Tijarat Generate QR screen showing a merchant's Raast QR code" },
+        { src: aikSendMoney, width: 480, height: 1061, caption: "Send money", alt: "aik Tijarat Send Money screen with aik, bank and Raast transfer options" },
+        { src: aikPayBills, width: 480, height: 1061, caption: "Pay bills", alt: "aik Tijarat Pay Bills screen with gas, electricity, water and other billers" },
+      ],
+    },
     /** Case-study summary, written only from the facts in `details` below. */
     caseStudy: {
       problem:
@@ -457,6 +474,9 @@ export const beyond = {
   title: "Beyond the code.",
   intro:
     "I like understanding how technology works behind the scenes, and I keep challenging myself to get a little better at what I do.",
+  // TODO(human): add 2–4 of your real interests as { title, text, icon }.
+  // icon: one of "compass", "book", "bulb", "code", "globe", "heart", "terminal", "person".
+  // While this list is empty, the section shows the doodle illustration instead of cards.
   interests: [],
 };
 

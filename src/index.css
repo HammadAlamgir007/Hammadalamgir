@@ -115,8 +115,8 @@
 @layer components {
   /* ─── Typography scale ───────────────────────────────── */
   .t-display {
-    font-size: clamp(2.5rem, 1.55rem + 4.1vw, 4.75rem);
-    line-height: 1.04;
+    font-size: clamp(2.5rem, 1.6rem + 3.4vw, 4.25rem);
+    line-height: 1.06;
     letter-spacing: -0.035em;
     font-weight: 800;
   }
@@ -218,21 +218,6 @@
     box-shadow: inset 0 0 0 1px rgb(var(--accent) / 0.6);
   }
 
-  /* Case-study topic list */
-  .side-item {
-    @apply flex shrink-0 items-center gap-2.5 rounded-xl px-3 py-2 text-left text-sm font-medium text-fg-2 md:w-full;
-    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
-  }
-  .side-item:hover {
-    color: rgb(var(--fg));
-    background: rgb(var(--surface) / 0.7);
-  }
-  .side-item[aria-selected="true"] {
-    color: rgb(var(--fg));
-    background: rgb(var(--surface));
-    box-shadow: inset 3px 0 0 rgb(var(--accent)), 0 0 0 1px rgb(var(--line));
-  }
-
   /* ─── Buttons & links ────────────────────────────────── */
   .btn {
     @apply relative inline-flex min-h-[44px] select-none items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 text-[0.9375rem] font-semibold;
@@ -289,13 +274,6 @@
     outline: none;
     box-shadow: inset 0 0 0 1.5px rgb(var(--accent-ink)), 0 0 0 4px rgb(var(--accent) / 0.2);
   }
-
-  .no-scrollbar {
-    scrollbar-width: none;
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 /* ─────────────────────────────────────────────────────────
@@ -351,16 +329,8 @@
   animation: fade-up 0.8s var(--ease) both;
   animation-delay: calc(80ms + var(--i, 0) * 80ms);
 }
-/* Case-study pane swaps */
-.pane-in {
-  animation: fade-in 0.35s var(--ease) both;
-}
 @keyframes fade-up {
   from { opacity: 0; transform: translate3d(0, 14px, 0); }
-  to   { opacity: 1; transform: none; }
-}
-@keyframes fade-in {
-  from { opacity: 0; transform: translate3d(0, 6px, 0); }
   to   { opacity: 1; transform: none; }
 }
 
@@ -375,6 +345,6 @@
   .js [data-reveal] { opacity: 1; transform: none; }
   /* Entrance animations have start delays and fill-mode "both", so a short
      duration alone would still hide content during the delay — remove them. */
-  .enter, .pane-in, .twinkle { animation: none !important; }
+  .enter, .twinkle { animation: none !important; }
   .card-hover:hover { transform: none; }
 }

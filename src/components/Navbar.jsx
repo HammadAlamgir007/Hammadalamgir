@@ -107,7 +107,7 @@ export default function Navbar() {
           >
             <Icon name={isDark ? "sun" : "moon"} className="h-[18px] w-[18px]" />
           </button>
-          <a href={profile.cv} download className="btn btn-primary btn-sm hidden sm:inline-flex">
+          <a href={profile.cv} download className="btn btn-outline btn-sm hidden sm:inline-flex">
             <Icon name="download" className="h-4 w-4" />
             Download CV
           </a>

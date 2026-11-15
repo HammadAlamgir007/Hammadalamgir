@@ -6,6 +6,7 @@ const paths = {
   arrowRight: <path d="M5 12h14M13 6l6 6-6 6" />,
   arrowUpRight: <path d="M7 17 17 7M8 7h9v9" />,
   arrowUp: <path d="M12 19V5M6 11l6-6 6 6" />,
+  play: <path d="M8 5.5v13l10.5-6.5L8 5.5Z" />,
   download: <path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14" />,
   mail: (
     <>
